@@ -1,0 +1,925 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>부산현대미술관 | Museum of Contemporary Art Busan</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&family=Montserrat:wght@400;500;600;700;800&family=Cormorant+Garamond:ital,wght@1,300;1,400&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#111;
+    --text:#333;
+    --muted:#888;
+    --line:#e3e3e3;
+    --bg-soft:#f4f4f4;
+    --green:#3fb34f;
+    --green-dark:#1f7a2e;
+    --dark:#141414;
+    --hover:#39b034;
+    --wrap:1240px;
+    --head:1323px;
+    --head-side:max(40px, calc((100% - var(--head)) / 2));
+    --hero-inset:calc(var(--head-side) + 20px);
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{font-family:'Noto Sans KR',sans-serif;color:var(--text);background:#fff;line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+  img{display:block;width:100%;height:100%;object-fit:cover}
+  a{color:inherit;text-decoration:none}
+  ul{list-style:none}
+  button{font-family:inherit;cursor:pointer;border:0;background:none}
+  .wrap{max-width:var(--wrap);margin:0 auto;padding:0 40px}
+  .en{font-family:'Montserrat',sans-serif}
+  .ph{background:#ddd linear-gradient(135deg,#e6e6e6,#cfcfcf)}
+
+  /* ---------- common section head ---------- */
+  .sec{padding:120px 0}
+  .sec-head{position:relative;text-align:center;margin-bottom:56px}
+  .sec-title{font-family:'Montserrat',sans-serif;font-size:40px;font-weight:800;color:var(--ink);letter-spacing:-.5px;line-height:1.2}
+  .sec-title span{color:#9a9a9a;font-weight:600}
+  .sec-sub{font-size:14px;color:var(--muted);margin-top:10px;letter-spacing:.5px}
+  .more-btn{display:inline-flex;align-items:center;gap:10px;padding:8px 14px 8px 18px;border:1px solid #cfcfcf;border-radius:30px;font-size:12px;color:#555;background:#fff;transition:.25s}
+  .more-btn::after{content:"";width:18px;height:18px;border-radius:50%;border:1px solid #999;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23555' stroke-width='2.4'%3E%3Cpath d='M12 5v14M5 12h14'/%3E%3C/svg%3E") center/10px no-repeat}
+  .more-btn:hover{background:var(--hover);color:#fff;border-color:var(--hover)}
+  .more-btn:hover::after{border-color:#fff;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23fff' stroke-width='2.4'%3E%3Cpath d='M12 5v14M5 12h14'/%3E%3C/svg%3E")}
+  .sec-head .more-btn{position:absolute;left:0;top:10px}
+  .sec-head.right{text-align:right}
+  .arrow{width:44px;height:44px;display:grid;place-items:center;color:#aaa;transition:.2s}
+  .arrow:hover{color:#555}
+  .arrow svg{width:26px;height:26px}
+
+  /* ---------- header / hero ---------- */
+  /* overflow:clip, not hidden: the grid lines run past the edges, and a hidden box could still be scrolled sideways by focus/scrollIntoView */
+  .hero{position:relative;height:100vh;min-height:680px;color:#fff;overflow:hidden;overflow:clip;background:#2d3b2a}
+  .hero-slide{position:absolute;inset:0;opacity:0;transition:opacity 1.2s ease}
+  .hero-slide.on{opacity:1}
+  .hero-slide img{transform:scale(1.06);transition:transform 7s ease}
+  .hero-slide.on img{transform:scale(1)}
+  .hero::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.45) 0%,rgba(0,0,0,.05) 35%,rgba(0,0,0,.05) 60%,rgba(0,0,0,.55) 100%);pointer-events:none}
+  header{position:absolute;top:0;left:0;right:0;z-index:20;transition:background .3s}
+  header.fixed{position:fixed;background:rgba(17,17,17,.6);backdrop-filter:blur(8px)}
+  .hd{display:flex;align-items:center;justify-content:space-between;height:96px;max-width:calc(var(--head) + 80px);margin:0 auto;padding:0 40px;transition:height .3s}
+  header.fixed .hd{height:72px}
+  .logo{display:flex;align-items:center;gap:10px;color:#fff}
+  .logo img{width:auto;height:54px;object-fit:contain;transition:height .3s}
+  header.fixed .logo img{height:44px}
+  .logo-mark{position:relative;width:86px;height:48px;font-family:'Montserrat',sans-serif;font-weight:800;line-height:1}
+  .logo-mark .m{position:absolute;left:14px;top:0;font-size:20px}
+  .logo-mark .b{position:absolute;left:0;bottom:4px;font-size:22px;letter-spacing:-1px}
+  .logo-mark .c{position:absolute;right:0;bottom:2px;width:22px;height:22px;border:2px solid currentColor;border-radius:50%;font-size:11px;display:grid;place-items:center}
+  .logo-mark .o{position:absolute;left:34px;top:4px;width:12px;height:12px;border:2px solid currentColor;border-radius:50%}
+  .logo-txt{font-size:10px;line-height:1.35;font-weight:500;opacity:.9}
+  .gnb{display:flex;gap:44px;font-size:14px;font-weight:500}
+  .gnb a{position:relative;padding:6px 0;opacity:.92}
+  .gnb a::after{content:"";position:absolute;left:0;bottom:0;width:0;height:2px;background:var(--green);transition:.25s}
+  .gnb a:hover::after{width:100%}
+  .util{display:flex;align-items:center;gap:22px;font-size:13px}
+  .util .lang{font-family:'Montserrat',sans-serif;font-weight:600;letter-spacing:1px}
+  .burger{width:26px;height:18px;position:relative}
+  .burger i{position:absolute;left:0;right:0;height:2px;background:#fff}
+  .burger i:nth-child(1){top:0}.burger i:nth-child(2){top:8px}.burger i:nth-child(3){top:16px}
+
+  .hero-copy{position:absolute;z-index:5;left:50%;top:34%;transform:translateX(-50%);width:100%;max-width:calc(var(--head) + 80px);padding:0 60px}
+  .hero-copy .kicker{font-size:16px;font-weight:500;opacity:.9;letter-spacing:.5px}
+  .hero-copy h1{font-size:clamp(36px,4.4vw,64px);font-weight:700;letter-spacing:-1.5px;line-height:1.25;text-shadow:0 2px 20px rgba(0,0,0,.25)}
+  .hero-line{display:flex;align-items:center;justify-content:space-between;gap:24px;margin-top:10px}
+  .set-btn{flex:none;width:75px;height:75px;margin:-15px 0;border-radius:50%;border:1.5px solid rgba(255,255,255,.8);background:rgba(255,255,255,.1);color:#fff;display:grid;place-items:center;transition:background .25s}
+  .set-btn svg{width:31px;height:31px;animation:spin 18s linear infinite;filter:drop-shadow(0 1px 6px rgba(0,0,0,.3))}
+  .set-btn svg *{stroke-width:1px;vector-effect:non-scaling-stroke}
+  .set-btn svg path{fill-rule:evenodd;transition:fill .25s}
+  .set-btn:hover svg path,.set-btn[aria-expanded="true"] svg path{fill:var(--hover)}
+  @keyframes spin{to{transform:rotate(360deg)}}
+  .set-btn:hover,.set-btn[aria-expanded="true"]{background:rgba(255,255,255,.3)}
+  .set-btn:focus-visible,.set-panel button:focus-visible,.set-panel a:focus-visible{outline:2px solid var(--green);outline-offset:3px}
+  .hero-ctrl{position:absolute;z-index:6;right:var(--hero-inset);bottom:93px;display:flex;align-items:center;gap:12px;font-family:'Montserrat',sans-serif;font-size:12px}
+  .hero-ctrl .en{min-width:52px;text-align:center;opacity:.9}
+  .hero-ctrl .circ{width:36px;height:36px;border-radius:50%;border:1px solid rgba(255,255,255,.7);color:#fff;display:grid;place-items:center;transition:.25s}
+  .hero-ctrl .circ svg{width:16px;height:16px}
+  .hero-ctrl .circ:hover{background:var(--hover);border-color:var(--hover)}
+
+  .hero-tag{position:absolute;z-index:6;left:var(--hero-inset);bottom:110px}
+  .hero-tag em{display:block;font-family:'Cormorant Garamond',serif;font-style:italic;font-weight:300;font-size:clamp(26px,2.2vw,36px);line-height:1.1;opacity:.92}
+  .hero-tag p{font-size:16px;font-weight:500;margin-top:14px;text-shadow:0 1px 10px rgba(0,0,0,.25)}
+  .hero-prog{display:flex;gap:4px;margin-top:22px}
+  .hero-prog i{position:relative;width:116px;height:2px;background:rgba(255,255,255,.35);overflow:hidden}
+  .hero-prog i::after{content:"";position:absolute;left:0;top:0;bottom:0;width:0;background:var(--hover)}
+  .hero-prog i.on::after{animation:prog 6s linear forwards}
+  .hero-prog.paused i.on::after{animation-play-state:paused}
+  @keyframes prog{to{width:100%}}
+
+  .hero-grid{position:absolute;z-index:3;top:120px;bottom:0;left:var(--head-side);right:var(--head-side);pointer-events:none}
+  .hero-grid .v{position:absolute;top:0;bottom:0;width:1px;background:rgba(255,255,255,.16)}
+  .hero-grid .h{position:absolute;left:-100vw;right:-100vw;height:1px;background:rgba(255,255,255,.12)}
+  .hero-grid .p{position:absolute;width:13px;height:13px;transform:translate(-50%,-50%);animation:plusPulse 2.4s ease-in-out infinite}
+  @keyframes plusPulse{0%,100%{transform:translate(-50%,-50%) scale(.6)}50%{transform:translate(-50%,-50%) scale(1.5)}}
+  .hero-grid .p::before,.hero-grid .p::after{content:"";position:absolute;background:rgba(255,255,255,.75)}
+  .hero-grid .p::before{left:6px;top:0;width:1px;height:13px}
+  .hero-grid .p::after{top:6px;left:0;height:1px;width:13px}
+
+  .quick{position:absolute;z-index:6;left:0;right:0;bottom:0;background:rgba(10,10,10,.88);border-top:3px solid var(--green)}
+  .quick ul{display:grid;grid-template-columns:repeat(3,1fr);max-width:calc(var(--head) + 80px);margin:0 auto;padding:0 40px}
+  .quick li{border-left:1px solid rgba(255,255,255,.12);font-size:13px;min-width:0}
+  .quick li:last-child{border-right:1px solid rgba(255,255,255,.12)}
+  .quick a{display:flex;align-items:center;gap:32px;height:76px;padding:0 40px;transition:background .25s}
+  .quick a:hover{background:rgba(255,255,255,.05)}
+  .quick b{color:var(--green);font-weight:700;flex:none}
+  .quick span{color:#fff;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .quick .go{flex:none;width:18px;height:18px;margin-left:auto;color:#fff;transition:transform .25s}
+  .quick a:hover .go{transform:translateX(4px)}
+
+  /* ---------- exhibition ---------- */
+  .exh-body{display:grid;grid-template-columns:1.05fr 1fr;gap:48px;align-items:stretch;position:relative}
+  .exh-main{position:relative;overflow:hidden}
+  .exh-main img{position:absolute;inset:0}
+  .exh-main::after{content:"";position:absolute;inset:0;background:linear-gradient(0deg,rgba(0,0,0,.75),transparent 55%)}
+  .exh-main .cap{position:absolute;left:28px;bottom:26px;right:28px;z-index:2;color:#fff}
+  .exh-main .cap small{font-size:11px;opacity:.7;letter-spacing:1px}
+  .exh-main .cap h3{font-family:'Montserrat',sans-serif;font-size:16px;font-weight:600;margin:4px 0}
+  .exh-main .cap p{font-size:12px;opacity:.75}
+  .exh-info h3{font-size:30px;font-weight:700;color:var(--ink);display:flex;align-items:baseline;gap:16px;flex-wrap:wrap}
+  .exh-info h3 small{font-family:'Montserrat',sans-serif;font-size:13px;font-weight:500;color:var(--muted)}
+  .exh-meta{margin:22px 0;border-top:1px solid var(--ink);border-bottom:1px solid var(--line);padding:16px 0}
+  .exh-meta li{display:grid;grid-template-columns:70px 1fr;font-size:13px;padding:3px 0}
+  .exh-meta li b{color:var(--ink);font-weight:600}
+  .exh-desc{font-size:13.5px;color:#666;line-height:1.85}
+  .exh-thumbs{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:28px}
+  .thumb .img{aspect-ratio:4/3;overflow:hidden}
+  .thumb .img img{transition:transform .5s}
+  .thumb:hover .img img{transform:scale(1.06)}
+  .thumb small{display:block;font-size:10px;color:var(--muted);margin-top:10px;letter-spacing:.5px}
+  .thumb h4{font-family:'Montserrat',sans-serif;font-size:13px;font-weight:700;color:var(--ink);line-height:1.35}
+  .side-arrows{position:absolute;left:-70px;right:-70px;top:50%;transform:translateY(-50%);display:flex;justify-content:space-between;pointer-events:none}
+  .side-arrows .arrow{pointer-events:auto}
+
+  /* ---------- collection ---------- */
+  .collection{background:var(--bg-soft)}
+  .col-wrap{position:relative}
+  .col-list{display:flex;gap:28px;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none}
+  .col-list::-webkit-scrollbar{display:none}
+  .col-card{flex:0 0 calc((100% - 56px)/3);scroll-snap-align:start}
+  .col-card .img{aspect-ratio:1/0.95;overflow:hidden}
+  .col-card .img img{transition:transform .6s}
+  .col-card:hover .img img{transform:scale(1.07)}
+  .col-card .cat{display:flex;align-items:center;gap:8px;font-size:11px;color:var(--muted);margin-top:18px;padding-bottom:10px;border-bottom:1px solid var(--line)}
+  .col-card .cat::before{content:"";width:12px;height:12px;background:var(--hover)}
+  .col-card h4{font-size:18px;font-weight:700;color:var(--ink);margin:12px 0 8px}
+  .col-card p{font-size:13px;color:#777;line-height:1.75;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+
+  /* ---------- book ---------- */
+  .book{background:#fff;padding-top:140px;padding-bottom:0}
+  .book-foot{display:flow-root;background:#f7f7f7;padding-bottom:110px}
+  .book .sec-title{color:#8a8a8a}
+  .book .sec-title b{color:var(--ink)}
+  .book-band{height:420px;position:relative;overflow:hidden}
+  .book-band::after{content:"";position:absolute;inset:0;background:linear-gradient(0deg,rgba(0,0,0,.72) 0%,rgba(0,0,0,.4) 45%,rgba(0,0,0,.08) 100%);pointer-events:none}
+  .book-card{position:relative;margin-top:-220px;display:grid;grid-template-columns:1fr 1fr;background:#fff;box-shadow:0 30px 60px rgba(0,0,0,.08)}
+  .book-card .img{min-height:380px}
+  .book-card .txt{padding:56px 52px;display:flex;flex-direction:column}
+  .book-card .txt h3{font-size:34px;font-weight:900;color:var(--ink);display:flex;gap:22px;align-items:flex-start;flex-wrap:wrap}
+  .book-card .txt h3 small{font-size:15px;font-weight:500;color:#555;line-height:1.6;padding-top:6px}
+  .book-card .txt p{font-size:13.5px;color:#777;line-height:1.85;margin-top:26px}
+  .book-card .txt .more-btn{align-self:flex-end;margin-top:auto}
+
+  /* ---------- events ---------- */
+  .ev-list{display:grid;gap:28px}
+  .ev{display:grid;grid-template-columns:1fr 340px;background:var(--bg-soft);min-height:250px;overflow:hidden}
+  .ev .txt{padding:36px 44px}
+  .ev .tags{display:flex;gap:10px;margin-bottom:14px}
+  .ev .tags span{display:inline-flex;align-items:center;gap:6px;font-size:11px;font-weight:600;padding:4px 10px;background:#fff;border-radius:3px}
+  .ev .tags span::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--ink)}
+  .ev h3{font-family:'Montserrat','Noto Sans KR',sans-serif;font-size:20px;font-weight:800;color:var(--ink);line-height:1.35}
+  .ev p{font-size:13px;color:#777;margin:14px 0 20px;max-width:640px}
+  .ev .btn-sm{display:inline-block;font-size:11px;padding:5px 14px;border:1px solid #bbb;border-radius:20px;background:#fff;transition:.2s}
+  .ev .btn-sm:hover{background:var(--hover);color:#fff;border-color:var(--hover)}
+  .ev .img{position:relative;overflow:hidden}
+  .ev .img img{transition:transform .6s}
+  .ev:hover .img img{transform:scale(1.06)}
+  .ev .img .play{position:absolute;left:18px;bottom:18px;width:34px;height:22px;background:#fff;border-radius:4px;display:grid;place-items:center}
+  .ev .img .play::before{content:"";border-left:8px solid #e33;border-top:5px solid transparent;border-bottom:5px solid transparent}
+
+  /* ---------- full bleed gallery ---------- */
+  .bleed{height:clamp(220px,29.4vw,500px);overflow:hidden;position:relative}
+  .bleed img{transform:scale(1.1);will-change:transform;object-position:50% 72%}
+  .bleed::after{content:"";position:absolute;inset:0;z-index:1;background:linear-gradient(0deg,rgba(0,0,0,.62) 0%,rgba(0,0,0,.32) 40%,rgba(0,0,0,.08) 75%,rgba(0,0,0,0) 100%);pointer-events:none}
+  .bleed .bleed-logo{position:absolute;z-index:2;left:52%;top:79%;transform:translate(-50%,-50%);width:clamp(74px,10vw,174px);height:auto;filter:drop-shadow(0 2px 10px rgba(0,0,0,.18))}
+
+  /* ---------- together ---------- */
+  .tg-main{position:relative}
+  .tg-main .img{aspect-ratio:16/8.4;overflow:hidden}
+  .figcap{display:flex;justify-content:flex-end;gap:10px;font-size:11px;color:var(--muted);padding:12px 0;border-bottom:1px solid var(--line)}
+  .figcap b{color:var(--ink);font-weight:600}
+  .tg-sub{display:grid;grid-template-columns:1fr 1fr;gap:40px;margin-top:60px}
+  .tg-sub .img{aspect-ratio:4/3;overflow:hidden;background:var(--bg-soft)}
+  .tg-sub .figcap{justify-content:space-between}
+
+  /* ---------- goods banner ---------- */
+  .goods{height:clamp(220px,29.4vw,500px);position:relative;overflow:hidden;display:grid;place-items:center}
+  .goods img{position:absolute;inset:0;filter:grayscale(1) contrast(1.05) brightness(.6)}
+  .goods h2{position:relative;font-family:'Montserrat',sans-serif;font-size:clamp(20px,2.2vw,30px);font-weight:700;color:#fff;letter-spacing:3px;text-shadow:0 2px 14px rgba(0,0,0,.4)}
+
+  /* ---------- store ---------- */
+  .store .sec-head{margin-bottom:24px}
+  .store .center-btn{text-align:center;margin-bottom:56px}
+  .store-wrap{position:relative;max-width:1600px;margin:0 auto;padding:0 60px}
+  .store-track{display:flex;gap:24px;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;padding-bottom:4px}
+  .store-track::-webkit-scrollbar{display:none}
+  .prod{flex:0 0 calc((100% - 96px)/5);scroll-snap-align:start}
+  .prod .img{aspect-ratio:3/4;overflow:hidden;background:var(--bg-soft)}
+  .prod .img img{transition:transform .6s}
+  .prod:hover .img img{transform:scale(1.06)}
+  .prod h4{font-size:12.5px;font-weight:500;color:#555;margin-top:16px;line-height:1.5;height:38px;overflow:hidden}
+  .prod b{display:block;font-size:15px;font-weight:700;color:var(--ink);margin-top:6px}
+  .store-arrows{position:absolute;left:8px;right:8px;top:38%;display:flex;justify-content:space-between;pointer-events:none}
+  .store-arrows .arrow{pointer-events:auto}
+
+  /* ---------- notice ---------- */
+  .notice{position:relative;height:500px;overflow:hidden;margin-top:120px}
+  .notice > img{position:absolute;inset:0}
+  .notice .wrap{position:relative;height:100%;display:flex;align-items:center}
+  .notice-box{width:440px;background:rgba(255,255,255,.93);padding:40px 40px 34px;box-shadow:0 20px 50px rgba(0,0,0,.12)}
+  .notice-box h3{font-family:'Montserrat',sans-serif;font-size:22px;font-weight:800;color:var(--ink);margin-bottom:18px}
+  .notice-box li{display:flex;gap:10px;font-size:13px;color:#555;padding:9px 0;border-bottom:1px solid #e8e8e8}
+  .notice-box li:hover{color:var(--ink)}
+  .notice-box li::before{content:"";width:4px;height:4px;border-radius:50%;background:var(--green);margin-top:9px;flex:none}
+  .notice-box li em{font-style:normal;margin-left:auto;color:#aaa;font-size:11.5px;flex:none}
+  .notice-box .more-btn{margin-top:24px}
+
+  /* ---------- footer ---------- */
+  footer{background:#fff;border-top:1px solid var(--line);padding:70px 0 0}
+  .ft{display:grid;grid-template-columns:1.3fr 1fr;gap:60px}
+  .ft address{font-style:normal;font-size:13px;color:#666;line-height:1.9}
+  .ft address b{color:var(--ink)}
+  .ft .mail{display:block;font-weight:700;color:var(--ink);margin-top:10px}
+  .sns{display:flex;gap:16px;margin:26px 0}
+  .sns a{width:20px;height:20px;color:#777}
+  .sns a:hover{color:var(--ink)}
+  .ft-links{display:grid;grid-template-columns:repeat(2,max-content);gap:6px 60px;font-size:12px;color:#888}
+  .ft-links a:hover{color:var(--ink)}
+  .news h4{font-size:13px;font-weight:700;color:var(--ink);margin-bottom:12px}
+  .news input{width:100%;height:44px;border:1px solid #ddd;padding:0 14px;font:inherit;font-size:13px;outline:none}
+  .news input:focus{border-color:var(--green)}
+  .news button{width:100%;height:44px;margin-top:8px;background:var(--green);color:#fff;font-weight:700;font-size:13px;transition:.2s}
+  .news button:hover{background:var(--green-dark)}
+  .ft-logo{display:flex;align-items:center;gap:12px;justify-content:flex-end;margin-top:60px;color:var(--ink)}
+  .ft-logo img{width:auto;height:64px;max-width:100%;object-fit:contain}
+  .copy{background:var(--dark);color:#888;font-size:11px;text-align:center;padding:16px 0;margin-top:60px;font-family:'Montserrat',sans-serif}
+
+  /* ---------- reveal ---------- */
+  .rv{opacity:0;transform:translateY(40px);transition:opacity .9s ease,transform .9s ease}
+  .rv.in{opacity:1;transform:none}
+
+  /* ---------- responsive ---------- */
+  @media (max-width:1280px){
+    .side-arrows{left:-10px;right:-10px}
+    .gnb{gap:26px}
+  }
+  @media (max-width:1024px){
+    .gnb{display:none}
+    .hd{padding:0 24px}
+    .quick ul{padding:0}
+    .quick a{padding:0 22px;gap:20px}
+    .hero-prog i{width:70px}
+    .exh-body{grid-template-columns:1fr}
+    .exh-main{aspect-ratio:4/3.1}
+    .side-arrows{display:none}
+    .col-card{flex-basis:calc((100% - 28px)/2)}
+    .book-card{grid-template-columns:1fr}
+    .prod{flex-basis:calc((100% - 48px)/3)}
+    .ft{grid-template-columns:1fr}
+  }
+  @media (max-width:680px){
+    .wrap{padding:0 16px}
+    .sec{padding:80px 0}
+    .sec-title{font-size:28px}
+    .sec-head .more-btn{position:static;margin-bottom:16px}
+    .sec-head.right{text-align:center}
+    :root{--head-side:16px}
+    .hero-copy{padding:0 36px}
+    .set-btn{position:absolute;right:36px;bottom:100%;margin:0 0 14px;width:56px;height:56px}
+    .set-btn svg{width:24px;height:24px}
+    .quick li{font-size:12px}
+    .quick a{flex-direction:column;align-items:flex-start;justify-content:center;gap:2px;padding:0 12px;height:64px}
+    .quick span{font-size:11px;max-width:100%}
+    .quick .go{display:none}
+    .hero-ctrl{bottom:88px;gap:8px}
+    .hero-ctrl .circ{width:32px;height:32px}
+    .hero-tag{bottom:140px}
+    .hero-tag p{font-size:14px;margin-top:8px}
+    .hero-prog{margin-top:14px}
+    .hero-prog i{width:44px}
+    .hero-grid .p{display:none}
+    .exh-thumbs,.tg-sub{grid-template-columns:1fr}
+    .col-card{flex-basis:85%}
+    .ev{grid-template-columns:1fr}
+    .ev .img{height:220px}
+    .ev .txt{padding:28px 22px}
+    .book{padding-top:90px;padding-bottom:0}
+    .book-foot{padding-bottom:70px}
+    .book-band{height:260px}
+    .book-card{margin-top:-120px}
+    .book-card .txt{padding:32px 22px}
+    .store-wrap{padding:0 16px}
+    .prod{flex-basis:70%}
+    .notice{height:auto;padding:80px 0}
+    .notice-box{width:100%;padding:28px 22px}
+    .ft-links{gap:6px 30px}
+    .ft-logo{justify-content:flex-start}
+    .to-top{right:16px;bottom:16px;width:44px;height:44px}
+  }
+
+  /* back to top */
+  .to-top{position:fixed;right:32px;bottom:32px;z-index:90;width:52px;height:52px;border-radius:50%;
+    border:1px solid rgba(255,255,255,.25);background:rgba(17,17,17,.6);backdrop-filter:blur(8px);color:#fff;
+    display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1px;cursor:pointer;
+    opacity:0;visibility:hidden;transform:translateY(12px);transition:opacity .3s,transform .3s,visibility .3s,background .25s,border-color .25s}
+  .to-top.show{opacity:1;visibility:visible;transform:none}
+  .to-top:hover{background:var(--hover);border-color:var(--hover)}
+  .to-top svg{width:16px;height:16px}
+  .to-top span{font:600 9px/1 Montserrat,sans-serif;letter-spacing:.08em}
+
+  /* ---------- display settings panel ---------- */
+  .set-panel{position:fixed;z-index:100;top:0;right:0;bottom:0;width:min(420px,100%);background:var(--panel-bg,#fff);color:var(--text);
+    box-shadow:-20px 0 60px rgba(0,0,0,.18);display:flex;flex-direction:column;padding:34px 32px 30px;overflow-y:auto;
+    transform:translateX(100%);visibility:hidden;transition:transform .45s cubic-bezier(.22,.8,.26,1),visibility .45s}
+  .set-panel.open{transform:none;visibility:visible}
+  .set-close{position:absolute;top:22px;right:22px;width:40px;height:40px;border-radius:50%;display:grid;place-items:center;color:var(--ink);transition:background .2s}
+  .set-close:hover{background:var(--bg-soft)}
+  .set-close svg{width:20px;height:20px}
+  .set-panel h2{font-size:17px;font-weight:700;color:var(--ink);padding:6px 44px 26px 0;border-bottom:1px solid var(--line)}
+  .set-desc{font-size:13px;color:var(--muted);margin:26px 0 8px;line-height:1.7}
+  .set-group{padding:22px 0;border-bottom:1px solid var(--line)}
+  .set-group h3{font-size:12px;font-weight:700;color:var(--ink);letter-spacing:.5px;margin-bottom:14px}
+  .set-size{display:flex;align-items:center;gap:10px}
+  .set-size button{width:52px;height:52px;border-radius:50%;border:1px solid var(--line);color:var(--ink);font-weight:700;line-height:1;transition:.2s}
+  .set-size button:nth-child(1){font-size:13px}
+  .set-size button:nth-child(2){font-size:17px}
+  .set-size button:nth-child(3){font-size:22px}
+  .set-mode{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+  .set-mode button{display:flex;align-items:center;gap:10px;height:46px;padding:0 16px;border:1px solid var(--line);border-radius:30px;font-size:13px;font-weight:500;color:var(--ink);transition:.2s}
+  .set-mode button i{width:14px;height:14px;border-radius:50%;flex:none;border:1px solid rgba(128,128,128,.6)}
+  .set-size button:hover,.set-mode button:hover{border-color:var(--ink)}
+  .set-size button[aria-pressed="true"],.set-mode button[aria-pressed="true"]{border-color:var(--ink);box-shadow:inset 0 0 0 1px var(--ink)}
+  .set-links{display:flex;flex-wrap:wrap;gap:8px}
+  .set-links a{font-size:12px;padding:6px 14px;border:1px solid var(--line);border-radius:20px;color:var(--ink);transition:.2s}
+  .set-links a:hover{background:var(--hover);border-color:var(--hover);color:#fff}
+  .set-reset{margin-top:auto;align-self:flex-start;font-size:12px;color:var(--muted);text-decoration:underline;text-underline-offset:3px;padding:20px 0 0}
+  .set-reset:hover{color:var(--ink)}
+
+  /* text size: scale page content, keep hero at one screen */
+  body > section, body > footer{zoom:var(--fz,1)}
+  .hero{height:calc(100vh / var(--fz,1))}
+
+  /* ---------- display modes ---------- */
+  html:is([data-mode="dark"],[data-mode="eco"]){--ink:#f3f3f3;--text:#d2d2d2;--muted:#9c9c9c;--line:#343434;--bg-soft:#1d1d1d;--panel-bg:#191919;--surface:#1a1a1a;--body-bg:#111;color-scheme:dark}
+  html[data-mode="contrast"]{--ink:#fff;--text:#fff;--muted:#fff;--line:#fff;--bg-soft:#000;--panel-bg:#000;--surface:#000;--body-bg:#000;--green:#ffe600;--hover:#ffe600;--green-dark:#fff;color-scheme:dark}
+  html[data-mode] body,html[data-mode] .book,html[data-mode] footer{background:var(--body-bg)}
+  html[data-mode] :is(.book-foot,.book-card,.more-btn,.ev .btn-sm,.ev .tags span,.news input){background:var(--surface);color:var(--text)}
+  html[data-mode] .notice-box{background:rgba(20,20,20,.94)}
+  html[data-mode] :is(.more-btn,.ev .btn-sm,.news input,.notice-box li){border-color:var(--line)}
+  html[data-mode] :is(.exh-desc,.col-card p,.book-card .txt p,.book-card .txt h3 small,.ev p,.prod h4,.notice-box li,.notice-box li em,.ft address,.ft-links,.sns a,.arrow,.sec-title span,.book .sec-title){color:var(--text)}
+  html[data-mode] .more-btn::after{filter:invert(1)}
+  html[data-mode] .more-btn:hover,html[data-mode] .ev .btn-sm:hover{background:var(--hover);border-color:var(--hover);color:#fff}
+  html[data-mode] .ft-logo img{filter:brightness(0) invert(1)}
+  html[data-mode] .set-panel{box-shadow:-1px 0 0 var(--line)}
+
+  html[data-mode="eco"] *,html[data-mode="eco"] *::before,html[data-mode="eco"] *::after{animation:none!important;transition:none!important}
+  html[data-mode="eco"] img{filter:grayscale(.6) brightness(.8)}
+  html[data-mode="eco"] .hero-grid .p{transform:translate(-50%,-50%)}
+
+  html[data-mode="contrast"] .hero::after{background:rgba(0,0,0,.6)}
+  html[data-mode="contrast"] .quick{background:#000}
+  html[data-mode="contrast"] :is(.more-btn:hover,.ev .btn-sm:hover,.news button,.set-links a:hover,.hero-ctrl .circ:hover,.to-top:hover){color:#000}
+  html[data-mode="contrast"] :is(.ev,.book-card,.notice-box,.col-card .img,.prod .img){outline:1px solid #fff}
+  html[data-mode="contrast"] :is(.gnb a,.ft-links a,.notice-box li a){text-decoration:underline;text-underline-offset:4px}
+  html[data-mode="contrast"] .ev .img .play{background:#fff}
+
+  @media (max-width:680px){
+    .set-panel{padding:28px 20px 24px}
+  }
+</style>
+</head>
+<body>
+
+<!-- ===================== HERO ===================== -->
+<section class="hero" id="top">
+  <header id="hd">
+    <div class="hd">
+      <a href="#top" class="logo"><img src="images/logo.svg" alt="부산현대미술관 MoCA Busan"></a>
+      <nav class="gnb">
+        <a href="#exhibition">관람안내</a>
+        <a href="#exhibition">전시</a>
+        <a href="#collection">소장품</a>
+        <a href="#events">교육/프로그램</a>
+        <a href="#book">자료</a>
+        <a href="#together">참여</a>
+        <a href="#store">뮤지엄샵</a>
+        <a href="#notice">미술관소개</a>
+      </nav>
+      <div class="util">
+        <a href="#" class="lang">ENG</a>
+        <button class="burger" aria-label="메뉴"><i></i><i></i><i></i></button>
+      </div>
+    </div>
+  </header>
+
+  <div class="hero-slide on"><img src="images/hero-01.webp" alt="부산현대미술관 수직정원 정면 외관"></div>
+  <div class="hero-slide"><img src="images/hero-02.webp" alt="낙동강과 어우러진 부산현대미술관 전경"></div>
+  <div class="hero-slide"><img src="https://images.unsplash.com/photo-1642846442523-d852165d44a0?w=1920&h=1080&fit=crop&auto=format&q=80" alt="부산현대미술관 수직정원 외관"></div>
+  <div class="hero-slide"><img src="https://images.unsplash.com/photo-1531208853003-c1ec1b8a81d7?w=1920&h=1080&fit=crop&auto=format&q=80" alt="을숙도 풍경"></div>
+  <div class="hero-slide"><img src="https://images.unsplash.com/photo-1451438143976-4e1aa4f7f153?w=1920&h=1080&fit=crop&auto=format&q=80" alt="전시장 전경"></div>
+
+  <div class="hero-copy">
+    <p class="kicker">부산현대미술관 · 을숙도</p>
+    <div class="hero-line">
+    <h1>강과 바다가 만나는 자리</h1>
+    <button class="set-btn" id="setBtn" type="button" aria-label="화면 설정 열기" aria-expanded="false" aria-controls="setPanel">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1zM15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/></svg>
+    </button>
+    </div>
+  </div>
+
+  <div class="hero-grid" aria-hidden="true"></div>
+
+  <div class="hero-tag">
+    <em>where river meets sea</em>
+    <p>자연과 인간, 뉴미디어</p>
+    <div class="hero-prog" id="heroProg"></div>
+  </div>
+  <div class="hero-ctrl">
+    <button class="circ" id="hPrev" aria-label="이전"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 12H5M11 6l-6 6 6 6"/></svg></button>
+    <span class="en"><b id="cur">01</b> / <span id="total">05</span></span>
+    <button class="circ" id="hNext" aria-label="다음"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12h15M13 6l6 6-6 6"/></svg></button>
+    <button class="circ" id="hPause" aria-label="일시정지"><svg viewBox="0 0 24 24" fill="currentColor"><rect x="7" y="6" width="3" height="12" rx=".5"/><rect x="14" y="6" width="3" height="12" rx=".5"/></svg></button>
+  </div>
+
+  <div class="quick">
+    <ul>
+      <li><a href="#"><b>관람 안내</b><span>미술관 이용 안내</span><svg class="go" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12h15M13 6l6 6-6 6"/></svg></a></li>
+      <li><a href="#"><b>온라인 예약</b><span>방문을 준비하세요</span><svg class="go" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12h15M13 6l6 6-6 6"/></svg></a></li>
+      <li><a href="#"><b>오시는 길</b><span>을숙도에서 만나요</span><svg class="go" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12h15M13 6l6 6-6 6"/></svg></a></li>
+    </ul>
+  </div>
+</section>
+
+<!-- ===================== EXHIBITION ===================== -->
+<section class="sec" id="exhibition">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <a href="#" class="more-btn">전시 더보기</a>
+      <h2 class="sec-title">Exhibition</h2>
+      <p class="sec-sub">부산현대미술관 전시를 소개합니다</p>
+    </div>
+
+    <div class="exh-body rv">
+      <div class="side-arrows">
+        <button class="arrow" aria-label="이전"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M15 4l-8 8 8 8"/></svg></button>
+        <button class="arrow" aria-label="다음"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M9 4l8 8-8 8"/></svg></button>
+      </div>
+
+      <div class="exh-main ph">
+        <img src="images/exhibition-main.jpg" alt="몰입형 미디어 전시 전경">
+        <div class="cap">
+          <small>2024 MoCA BUSAN</small>
+          <h3>The First Impressionist Effect in 3D Design</h3>
+          <p>빛과 색으로 확장되는 감각의 공간, 몰입형 미디어 전시</p>
+        </div>
+      </div>
+
+      <div class="exh-info">
+        <h3>물결의 회연 <small class="en">tides, wind, and pixels</small></h3>
+        <ul class="exh-meta">
+          <li><b>기간</b><span>2024.09.06 – 2025.01.26</span></li>
+          <li><b>장소</b><span>부산현대미술관 1층 전시실 1, 2</span></li>
+          <li><b>관람료</b><span>무료</span></li>
+          <li><b>참여작가</b><span>국내외 작가 12인</span></li>
+        </ul>
+        <p class="exh-desc">강과 바다가 만나는 을숙도의 지형적 특성에서 출발한 이번 전시는 물결, 바람, 그리고 디지털 픽셀이라는 세 가지 흐름을 통해 자연과 기술이 서로를 비추는 방식을 탐구합니다. 관람객은 끊임없이 변화하는 풍경 속에서 자신만의 감각적 경험을 발견하게 됩니다.</p>
+        <div class="exh-thumbs">
+          <a href="#" class="thumb">
+            <div class="img ph"><img src="images/exhibition-thumb-01.webp" alt="붉은 하늘 아래 나무가 있는 정원 회화"></div>
+            <small>EXHIBITION 2024</small>
+            <h4>NewColor Shadow Island Perception Intensity</h4>
+          </a>
+          <a href="#" class="thumb">
+            <div class="img ph"><img src="images/exhibition-thumb-02.jpg" alt="데이터로 이루어진 디지털 파도"></div>
+            <small>EXHIBITION 2024</small>
+            <h4>Why Minor Anomalies Matter: Move Than the Tide</h4>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== COLLECTION ===================== -->
+<section class="sec collection" id="collection">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <a href="#" class="more-btn">소장품 더보기</a>
+      <h2 class="sec-title">Collection</h2>
+      <p class="sec-sub">부산현대미술관 대표 소장품</p>
+    </div>
+    <div class="col-wrap rv">
+      <div class="side-arrows" style="top:36%">
+        <button class="arrow" id="cPrev" aria-label="이전"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M15 4l-8 8 8 8"/></svg></button>
+        <button class="arrow" id="cNext" aria-label="다음"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M9 4l8 8-8 8"/></svg></button>
+      </div>
+      <div class="col-list" id="colTrack">
+        <a href="#" class="col-card">
+          <div class="img ph"><img src="https://images.unsplash.com/photo-1549317336-206569e8475c?w=600&h=570&fit=crop&auto=format&q=80" alt=""></div>
+          <div class="cat">COLLECTION · 미디어아트</div>
+          <h4>디지털 웨이브 : 보이지 않는 흐름</h4>
+          <p>데이터와 빛의 파동을 시각화한 대형 미디어 설치 작업으로, 도시를 흐르는 보이지 않는 에너지를 감각적으로 드러냅니다.</p>
+        </a>
+        <a href="#" class="col-card">
+          <div class="img ph"><img src="https://images.unsplash.com/photo-1614194405012-0414d157cee7?w=600&h=570&fit=crop&auto=format&q=80" alt=""></div>
+          <div class="cat">COLLECTION · 설치</div>
+          <h4>공중에 뜬 공간 : 빛과 중력의 균형</h4>
+          <p>천장에서 늘어뜨린 수백 개의 오브제가 빛을 받아 그림자를 만들며, 머무는 시간에 따라 다른 풍경을 보여주는 설치 작품입니다.</p>
+        </a>
+        <a href="#" class="col-card">
+          <div class="img ph"><img src="https://images.unsplash.com/photo-1509266272358-7701da638078?w=600&h=570&fit=crop&auto=format&q=80" alt=""></div>
+          <div class="cat">COLLECTION · 조각</div>
+          <h4>영원의 나선 : 쌓이고 사라지는 것들</h4>
+          <p>버려진 책과 일상의 사물을 나선형으로 쌓아 올려 기억과 시간의 축적을 은유하는 대형 조각 설치 작업입니다.</p>
+        </a>
+        <a href="#" class="col-card">
+          <div class="img ph"><img src="images/collection-04.webp" alt="전시장 바닥에 나선형으로 쌓인 책 설치 작품"></div>
+          <div class="cat">COLLECTION · 설치</div>
+          <h4>책의 나선 : 읽히지 않은 시간들</h4>
+          <p>수천 권의 책을 바닥에 나선형으로 쌓아 올린 대형 설치 작업으로, 관람객은 그 사이를 걸으며 쌓인 시간과 기억의 층위를 마주합니다.</p>
+        </a>
+        <a href="#" class="col-card">
+          <div class="img ph"><img src="images/collection-05.webp" alt="천장에 매달린 투명한 유리 조각 설치 작품"></div>
+          <div class="cat">COLLECTION · 설치</div>
+          <h4>유리의 정원 : 빛이 머무는 자리</h4>
+          <p>천장에서 내려온 수백 개의 투명한 조각이 조명을 받아 벽과 바닥에 그림자를 드리우며, 보는 위치에 따라 끊임없이 다른 풍경을 만듭니다.</p>
+        </a>
+        <a href="#" class="col-card">
+          <div class="img ph"><img src="images/collection-06.webp" alt="전시장 벽면 가득 펼쳐진 빛의 파도 미디어 작품"></div>
+          <div class="cat">COLLECTION · 미디어아트</div>
+          <h4>빛의 파도 : 데이터가 흐르는 바다</h4>
+          <p>벽면 전체를 채운 수만 개의 빛 입자가 파도처럼 흐르며, 강과 바다가 만나는 을숙도의 풍경을 디지털 언어로 다시 그려냅니다.</p>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== BOOK ===================== -->
+<section class="sec book" id="book">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <h2 class="sec-title"><b>Book</b>-Picture Island</h2>
+      <p class="sec-sub">책 그림 책방이 소개하는 이야기</p>
+    </div>
+  </div>
+  <div class="book-band ph"><img src="images/library-01.jpg" alt="책그림섬 원형 천장 서가"></div>
+  <div class="book-foot">
+  <div class="wrap">
+    <div class="book-card rv">
+      <div class="img ph"><img src="images/library-02.jpg" alt="책그림섬 원형 그림책 열람 공간"></div>
+      <div class="txt">
+        <h3>책그림섬 <small>마음을 다지고, 동행을 키우고,<br>당신의 하루가 머무는 곳.</small></h3>
+        <p>책그림섬은 부산현대미술관 1층에 위치한 그림책 전문 도서 공간입니다. 국내외 그림책과 예술 도서를 자유롭게 열람할 수 있으며, 아이와 어른이 함께 머물며 이야기를 나누는 쉼터가 되어 줍니다. 계절마다 바뀌는 큐레이션 서가와 작가 연계 프로그램도 만나보세요.</p>
+        <a href="#" class="more-btn">자세히 보기</a>
+      </div>
+    </div>
+  </div>
+  </div>
+</section>
+
+<!-- ===================== EVENTS ===================== -->
+<section class="sec" id="events">
+  <div class="wrap">
+    <div class="sec-head right rv">
+      <a href="#" class="more-btn">행사 더보기</a>
+      <h2 class="sec-title"><span>Upcoming-</span>Events</h2>
+    </div>
+    <div class="ev-list">
+      <article class="ev rv">
+        <div class="txt">
+          <div class="tags"><span>2024.11.07</span><span>PM 02:00 – 05:00</span></div>
+          <h3>WHISPERS OF ROSES : ETERNAL BLOOM<br>(장미의 속삭임 : 영원한 피어남)</h3>
+          <p>장미를 매개로 생명과 시간, 기억의 순환을 이야기하는 퍼포먼스와 아티스트 토크가 함께하는 특별 행사입니다. 사전 예약을 통해 누구나 참여할 수 있습니다.</p>
+          <a href="#" class="btn-sm">자세히보기</a>
+        </div>
+        <div class="img ph"><img src="https://images.unsplash.com/photo-1583502070936-d24abe7f1975?w=680&h=500&fit=crop&auto=format&q=80" alt="장미 정물 유화"><span class="play"></span></div>
+      </article>
+      <article class="ev rv">
+        <div class="txt">
+          <div class="tags"><span>2024.11.21</span><span>PM 01:00 – 04:00</span></div>
+          <h3>THE SPIRIT OF PINE : EVERGREEN RESILIENCE<br>(소나무의 기상 : 늘 푸른 기품)</h3>
+          <p>사계절 푸른 소나무의 기상을 주제로 한 드로잉 워크숍과 작가와의 대화. 자연 속에서 회복과 인내의 의미를 되새기는 시간을 마련했습니다.</p>
+          <a href="#" class="btn-sm">자세히보기</a>
+        </div>
+        <div class="img ph"><img src="https://images.unsplash.com/photo-1752316226195-5cbebb4b74d9?w=680&h=500&fit=crop&crop=top&auto=format&q=80" alt="하늘로 뻗은 소나무 그림"><span class="play"></span></div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== BLEED ===================== -->
+<section class="bleed ph"><img id="parallax" src="images/gallery-wide.jpg" alt="회화 작품이 걸린 전시장 전경"><img class="bleed-logo" src="images/logo-mark.svg" alt="MoCA Busan"></section>
+
+<!-- ===================== TOGETHER ===================== -->
+<section class="sec" id="together">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <a href="#" class="more-btn">참여 더보기</a>
+      <h2 class="sec-title">Museum<span> - Together</span></h2>
+      <p class="sec-sub">함께하는 미술관</p>
+    </div>
+    <div class="tg-main rv">
+      <div class="img ph"><img src="images/together-main.jpg" alt="전시 현수막이 걸린 부산현대미술관 외관"></div>
+      <div class="figcap"><span>미술관 소개</span><b>|</b><span>문화행사 · 체험프로그램 참여</span></div>
+    </div>
+    <div class="tg-sub">
+      <div class="rv">
+        <div class="img ph"><img src="images/together-family.webp" alt="미술관 앞 아빠와 아이" style="object-position:90% 50%"></div>
+        <div class="figcap"><span>시민참여 프로그램</span><span>자세히보기 ›</span></div>
+      </div>
+      <div class="rv">
+        <div class="img ph"><img src="images/together-kids.jpg" alt="전시장에서 그림을 그리는 어린이 교육 프로그램"></div>
+        <div class="figcap"><span>어린이 교육 프로그램</span><span>교육신청 ›</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== GOODS BANNER ===================== -->
+<section class="goods ph">
+  <img src="images/store-bg.jpg" alt="뮤지엄 스토어 매장 전경">
+  <h2 class="rv">GOODS MUSEUM STORE</h2>
+</section>
+
+<!-- ===================== STORE ===================== -->
+<section class="sec store" id="store">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <h2 class="sec-title">Museum<span> - Store</span></h2>
+      <p class="sec-sub">부산현대미술관의 감성을 담은 특별한 굿즈</p>
+    </div>
+    <div class="center-btn rv"><a href="#" class="more-btn">스토어 바로가기</a></div>
+  </div>
+  <div class="store-wrap rv">
+    <div class="store-arrows">
+      <button class="arrow" id="sPrev" aria-label="이전"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M15 4l-8 8 8 8"/></svg></button>
+      <button class="arrow" id="sNext" aria-label="다음"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M9 4l8 8-8 8"/></svg></button>
+    </div>
+    <div class="store-track" id="track">
+      <a href="#" class="prod"><div class="img ph"><img src="images/goods-01.webp" alt="백자 목련 유리컵"></div><h4>[MoCA] 백자 목련 유리컵</h4><b>18,000원</b></a>
+      <a href="#" class="prod"><div class="img ph"><img src="images/goods-02.webp" alt="아트 세라믹 플레이트"></div><h4>[MoCA] 컬렉션 아트 플레이트 세라믹 접시</h4><b>32,000원</b></a>
+      <a href="#" class="prod"><div class="img ph"><img src="images/goods-03.webp" alt="공룡과 몬스터 캐릭터 뱃지"></div><h4>[MoCA] 키즈 캐릭터 뱃지 세트 (2종)</h4><b>9,000원</b></a>
+      <a href="#" class="prod"><div class="img ph"><img src="images/goods-04.webp" alt="라인 드로잉 텀블러 그레이"></div><h4>[MoCA] 라인 드로잉 스테인리스 텀블러 그레이</h4><b>23,000원</b></a>
+      <a href="#" class="prod"><div class="img ph"><img src="images/goods-05.webp" alt="전시 캘린더와 스케줄북"></div><h4>[MoCA] 2026 전시 캘린더 &amp; 스케줄북</h4><b>15,000원</b></a>
+      <a href="#" class="prod"><div class="img ph"><img src="https://images.unsplash.com/photo-1574365569389-a10d488ca3fb?w=480&h=640&fit=crop&auto=format&q=80" alt=""></div><h4>[MoCA] 수직정원 에코백 내추럴</h4><b>19,000원</b></a>
+      <a href="#" class="prod"><div class="img ph"><img src="https://images.unsplash.com/photo-1496181133206-80ce9b88a853?w=480&h=640&fit=crop&auto=format&q=80" alt=""></div><h4>[MoCA] 드로잉 노트 A5 하드커버</h4><b>11,000원</b></a>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== NOTICE ===================== -->
+<section class="notice" id="notice">
+  <img src="images/notice-bg.webp" alt="">
+  <div class="wrap">
+    <div class="notice-box rv">
+      <h3>Notice</h3>
+      <ul>
+        <li>2024 하반기 정기 휴관 안내 <em>10.24</em></li>
+        <li>11월 어린이 교육 프로그램 참가자 모집 <em>10.18</em></li>
+        <li>미술관 주차장 이용 시간 변경 안내 <em>10.11</em></li>
+        <li>도슨트 해설 운영 일정 안내 <em>10.04</em></li>
+        <li>뮤지엄 스토어 리뉴얼 오픈 안내 <em>09.27</em></li>
+      </ul>
+      <a href="#" class="more-btn">공지 더보기</a>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== FOOTER ===================== -->
+<footer>
+  <div class="wrap ft">
+    <div>
+      <address>
+        <b>(49300) 부산광역시 사하구 낙동남로 1191 (하단동) 부산현대미술관</b><br>
+        TEL. 051-220-7400 &nbsp;|&nbsp; FAX. 051-220-7410<br>
+        화 – 일 AM 10:00 – PM 6:00 (입장마감 PM 5:30)<br>
+        1월 1일, 매주 월요일 휴관
+        <a href="#" class="mail en">info@moca.example</a>
+      </address>
+      <div class="sns">
+        <a href="#" aria-label="Facebook"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M14 8h3V4h-3a4 4 0 0 0-4 4v2H8v4h2v8h4v-8h3l1-4h-4V8z"/></svg></a>
+        <a href="#" aria-label="X"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.5 3h3.3l-7.2 8.2L22 21h-6.6l-5.2-6.8L4.3 21H1l7.7-8.8L.6 3h6.8l4.7 6.2L17.5 3zm-1.2 16h1.8L6.5 4.9H4.6L16.3 19z"/></svg></a>
+        <a href="#" aria-label="YouTube"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M23 7.2a3 3 0 0 0-2.1-2.1C19 4.6 12 4.6 12 4.6s-7 0-8.9.5A3 3 0 0 0 1 7.2 31 31 0 0 0 .6 12a31 31 0 0 0 .4 4.8 3 3 0 0 0 2.1 2.1c1.9.5 8.9.5 8.9.5s7 0 8.9-.5a3 3 0 0 0 2.1-2.1 31 31 0 0 0 .4-4.8 31 31 0 0 0-.4-4.8zM9.7 15.1V8.9L15.5 12l-5.8 3.1z"/></svg></a>
+        <a href="#" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg></a>
+      </div>
+      <div class="ft-links">
+        <a href="#">개인정보처리방침</a><a href="#">영상정보처리기기 운영방침</a>
+        <a href="#">이용약관</a><a href="#">저작권 정책</a>
+        <a href="#">오시는 길</a><a href="#">사이트맵</a>
+        <a href="#">관련 사이트</a><a href="#">고객의 소리</a>
+      </div>
+    </div>
+    <div>
+      <form class="news" onsubmit="event.preventDefault();this.querySelector('button').textContent='메시지 전송 완료';">
+        <h4 class="en">Newsletter</h4>
+        <input type="email" placeholder="이메일 주소를 입력하세요" required>
+        <button type="submit">메시지 보내기</button>
+      </form>
+      <div class="ft-logo">
+        <img src="images/logo-footer.svg" alt="부산현대미술관 Busan Museum of Contemporary Art">
+      </div>
+    </div>
+  </div>
+  <div class="copy">Copyright © Busan Museum of Contemporary Art. All Rights Reserved.</div>
+</footer>
+
+<button class="to-top" id="toTop" type="button" aria-label="맨 위로 이동">
+  <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 10l5-5 5 5"/></svg>
+  <span>TOP</span>
+</button>
+
+<aside class="set-panel" id="setPanel" role="dialog" aria-label="화면 설정" aria-hidden="true">
+  <button class="set-close" id="setClose" type="button" aria-label="화면 설정 닫기">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M5 5l14 14M19 5L5 19"/></svg>
+  </button>
+  <h2>안녕하세요? 부산현대미술관입니다.</h2>
+  <p class="set-desc">아래 옵션을 조정하여 나에게 꼭 맞는 탐색 환경을 만들어 보세요.</p>
+
+  <div class="set-group">
+    <h3>글자 크기</h3>
+    <div class="set-size" id="setSize">
+      <button type="button" data-fz="1" aria-label="글자 크기 기본">가</button>
+      <button type="button" data-fz="1.1" aria-label="글자 크기 크게">가</button>
+      <button type="button" data-fz="1.2" aria-label="글자 크기 아주 크게">가</button>
+    </div>
+  </div>
+
+  <div class="set-group">
+    <h3>추천 옵션</h3>
+    <div class="set-mode" id="setMode">
+      <button type="button" data-mode=""><i style="background:#fff"></i>기본</button>
+      <button type="button" data-mode="dark"><i style="background:#111"></i>다크모드</button>
+      <button type="button" data-mode="eco"><i style="background:#3fb34f"></i>에코모드</button>
+      <button type="button" data-mode="contrast"><i style="background:linear-gradient(90deg,#000 50%,#ffe600 50%)"></i>고대비모드</button>
+    </div>
+  </div>
+
+  <div class="set-group">
+    <h3>바로가기</h3>
+    <div class="set-links">
+      <a href="#exhibition">전시</a>
+      <a href="#collection">소장품</a>
+      <a href="#events">교육/프로그램</a>
+      <a href="#store">뮤지엄샵</a>
+      <a href="#notice">공지사항</a>
+    </div>
+  </div>
+
+  <button class="set-reset" id="setReset" type="button">설정 초기화</button>
+</aside>
+
+<script>
+  // header: fixed on scroll
+  const hd = document.getElementById('hd');
+  const hero = document.querySelector('.hero');
+  const toTop = document.getElementById('toTop');
+  toTop.addEventListener('click', () => scrollTo({ top: 0, behavior: 'smooth' }));
+  addEventListener('scroll', () => {
+    hd.classList.toggle('fixed', scrollY > 120);
+    toTop.classList.toggle('show', scrollY > innerHeight * 0.6);
+    const p = document.getElementById('parallax');
+    const r = p.parentElement.getBoundingClientRect();
+    if (r.bottom > 0 && r.top < innerHeight) {
+      const t = (r.top + r.height / 2 - innerHeight / 2) / innerHeight;
+      p.style.transform = `scale(1.1) translateY(${t * -30}px)`;
+    }
+  }, { passive: true });
+
+  // hero slider
+  const slides = [...document.querySelectorAll('.hero-slide')];
+  const cur = document.getElementById('cur');
+  const heroProg = document.getElementById('heroProg');
+  const pauseBtn = document.getElementById('hPause');
+  document.getElementById('total').textContent = String(slides.length).padStart(2, '0');
+  heroProg.innerHTML = slides.map(() => '<i></i>').join('');
+  const segs = [...heroProg.children];
+  const pauseIcon = pauseBtn.innerHTML;
+  const playIcon = '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5.5v13l11-6.5z"/></svg>';
+  let idx = 0, timer, paused = false;
+
+  // slide timer counts from when the current segment's fill started, so pausing resumes where it left off
+  let started = 0, remaining = 6000;
+  function schedule(ms) {
+    clearTimeout(timer);
+    started = Date.now(); remaining = ms;
+    timer = setTimeout(() => go(idx + 1), ms);
+  }
+  function go(n) {
+    slides[idx].classList.remove('on');
+    segs[idx].classList.remove('on');
+    idx = (n + slides.length) % slides.length;
+    slides[idx].classList.add('on');
+    void segs[idx].offsetWidth;
+    segs[idx].classList.add('on');
+    cur.textContent = String(idx + 1).padStart(2, '0');
+    if (paused) remaining = 6000; else schedule(6000);
+  }
+  document.getElementById('hPrev').onclick = () => go(idx - 1);
+  document.getElementById('hNext').onclick = () => go(idx + 1);
+  pauseBtn.onclick = () => {
+    paused = !paused;
+    heroProg.classList.toggle('paused', paused);
+    pauseBtn.innerHTML = paused ? playIcon : pauseIcon;
+    pauseBtn.setAttribute('aria-label', paused ? '재생' : '일시정지');
+    if (paused) { clearTimeout(timer); remaining -= Date.now() - started; }
+    else schedule(remaining);
+  };
+  segs[0].classList.add('on');
+  schedule(6000);
+
+  // hero grid: thin column/row lines with plus marks at the crossings.
+  // Columns repeat at the same width past the content edges so wide screens see a continuous pattern.
+  const grid = document.querySelector('.hero-grid');
+  const xs = [];
+  for (let k = -6; k <= 9; k++) xs.push(`${(k * 100 / 3).toFixed(3)}%`);
+  const ys = ['24%', '58%'];
+  grid.innerHTML =
+    xs.map(x => `<span class="v" style="left:${x}"></span>`).join('') +
+    ['0%', ...ys].map(y => `<span class="h" style="top:${y}"></span>`).join('') +
+    xs.flatMap((x, i) => ys.map((y, j) => `<span class="p" style="left:${x};top:${y};animation-delay:${-((i + j) % 4) * 0.6}s"></span>`)).join('');
+
+  // store carousel
+  const track = document.getElementById('track');
+  const step = () => track.querySelector('.prod').offsetWidth + 24;
+  document.getElementById('sPrev').onclick = () => track.scrollBy({ left: -step(), behavior: 'smooth' });
+  document.getElementById('sNext').onclick = () => track.scrollBy({ left: step(), behavior: 'smooth' });
+
+  // collection carousel
+  const colTrack = document.getElementById('colTrack');
+  const colStep = () => colTrack.querySelector('.col-card').offsetWidth + 28;
+  const colGo = dir => {
+    const step = colStep(), max = colTrack.scrollWidth - colTrack.clientWidth;
+    const idx = Math.round(colTrack.scrollLeft / step) + dir;
+    colTrack.scrollTo({ left: Math.max(0, Math.min(idx * step, max)), behavior: 'smooth' });
+  };
+  document.getElementById('cPrev').onclick = () => colGo(-1);
+  document.getElementById('cNext').onclick = () => colGo(1);
+
+  // reveal on scroll
+  const io = new IntersectionObserver(es => es.forEach(e => {
+    if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+  }), { threshold: .12 });
+  document.querySelectorAll('.rv').forEach(el => io.observe(el));
+
+  // display settings panel: text size + display mode, remembered per browser
+  const setBtn = document.getElementById('setBtn');
+  const setPanel = document.getElementById('setPanel');
+  const sizeBtns = [...document.querySelectorAll('#setSize button')];
+  const modeBtns = [...document.querySelectorAll('#setMode button')];
+  const root = document.documentElement;
+  const store = {
+    get(k) { try { return localStorage.getItem(k); } catch (e) { return null; } },
+    set(k, v) { try { localStorage.setItem(k, v); } catch (e) {} }
+  };
+  function openPanel(open) {
+    setPanel.classList.toggle('open', open);
+    setPanel.setAttribute('aria-hidden', String(!open));
+    setBtn.setAttribute('aria-expanded', String(open));
+    // preventScroll: the panel is still off-screen when it starts sliding in, and a normal focus would scroll the page sideways to reach it
+    if (open) document.getElementById('setClose').focus({ preventScroll: true }); else setBtn.focus({ preventScroll: true });
+  }
+  let ecoPaused = false;
+  function setSize(fz) {
+    if (!sizeBtns.some(b => b.dataset.fz === fz)) fz = '1';
+    root.style.setProperty('--fz', fz);
+    sizeBtns.forEach(b => b.setAttribute('aria-pressed', String(b.dataset.fz === fz)));
+    store.set('moca-fz', fz);
+  }
+  function setMode(mode) {
+    if (!modeBtns.some(b => b.dataset.mode === mode)) mode = '';
+    if (mode) root.dataset.mode = mode; else delete root.dataset.mode;
+    modeBtns.forEach(b => b.setAttribute('aria-pressed', String(b.dataset.mode === mode)));
+    // eco mode stops the hero slideshow; leaving it resumes only if eco was what stopped it
+    if (mode === 'eco' && !paused) { pauseBtn.click(); ecoPaused = true; }
+    else if (mode !== 'eco' && ecoPaused) { ecoPaused = false; if (paused) pauseBtn.click(); }
+    store.set('moca-mode', mode);
+  }
+  setBtn.onclick = () => openPanel(!setPanel.classList.contains('open'));
+  document.getElementById('setClose').onclick = () => openPanel(false);
+  document.getElementById('setReset').onclick = () => { setSize('1'); setMode(''); };
+  sizeBtns.forEach(b => b.onclick = () => setSize(b.dataset.fz));
+  modeBtns.forEach(b => b.onclick = () => setMode(b.dataset.mode));
+  setPanel.querySelectorAll('.set-links a').forEach(a => a.addEventListener('click', () => openPanel(false)));
+  addEventListener('keydown', e => { if (e.key === 'Escape' && setPanel.classList.contains('open')) openPanel(false); });
+  addEventListener('pointerdown', e => {
+    if (setPanel.classList.contains('open') && !setPanel.contains(e.target) && !setBtn.contains(e.target)) openPanel(false);
+  });
+  setSize(store.get('moca-fz') || '1');
+  setMode(store.get('moca-mode') || '');
+</script>
+</body>
+</html>
