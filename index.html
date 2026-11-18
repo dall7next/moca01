@@ -403,8 +403,23 @@
   html[data-mode="contrast"] :is(.gnb a,.ft-links a,.notice-box li a){text-decoration:underline;text-underline-offset:4px}
   html[data-mode="contrast"] .ev .img .play{background:#fff}
 
+  /* ---------- AI character button ---------- */
+  .ai-btn{position:fixed;z-index:90;right:17px;bottom:102px;width:70px;height:64px;transition:transform .25s;filter:drop-shadow(0 0 1.5px rgba(255,255,255,.95)) drop-shadow(0 3px 8px rgba(0,0,0,.3))}
+  .ai-btn svg{display:block;width:100%;height:100%;overflow:visible}
+  .ai-btn:hover{transform:scale(1.08)}
+  .ai-btn:focus-visible{outline:2px solid var(--green);outline-offset:3px}
+  .ai-arm{transform-origin:900px 770px;animation:aiWave 5s ease-in-out infinite}
+  .ai-eye{transform-box:fill-box;transform-origin:center;animation:aiBlink 4s linear infinite}
+  /* one short wave at the start of each 5s cycle, one blink at the end of each 4s cycle */
+  @keyframes aiWave{0%,28%,100%{transform:rotate(0)}6%{transform:rotate(-16deg)}12%{transform:rotate(14deg)}18%{transform:rotate(-16deg)}24%{transform:rotate(14deg)}}
+  @keyframes aiBlink{0%,94%,100%{transform:scaleY(1)}97%{transform:scaleY(.08)}}
+  @media (prefers-reduced-motion:reduce){.ai-arm,.ai-eye{animation:none}}
+  /* below this width the slide controls reach the icon's column, so it sits above them */
+  @media (max-width:1480px){.ai-btn{bottom:134px}}
+
   @media (max-width:680px){
     .set-panel{padding:28px 20px 24px}
+    .ai-btn{right:27px;bottom:126px;width:53px;height:48px}
   }
 </style>
 </head>
@@ -757,6 +772,43 @@
 <button class="to-top" id="toTop" type="button" aria-label="맨 위로 이동">
   <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 10l5-5 5 5"/></svg>
   <span>TOP</span>
+</button>
+
+<button class="ai-btn" id="aiBtn" type="button" aria-label="AI 안내">
+  <svg viewBox="0 0 1200 1100" aria-hidden="true">
+    <defs>
+      <g id="aiBody">
+        <rect x="150" y="285" width="750" height="725" rx="60"/>
+        <circle cx="240" cy="285" r="55"/><circle cx="350" cy="285" r="55"/><circle cx="460" cy="285" r="55"/><circle cx="570" cy="285" r="55"/><circle cx="680" cy="285" r="55"/><circle cx="790" cy="285" r="55"/>
+        <circle cx="240" cy="1010" r="55"/><circle cx="350" cy="1010" r="55"/><circle cx="460" cy="1010" r="55"/><circle cx="570" cy="1010" r="55"/><circle cx="680" cy="1010" r="55"/><circle cx="790" cy="1010" r="55"/>
+        <circle cx="150" cy="360" r="55"/><circle cx="150" cy="470" r="55"/><circle cx="150" cy="580" r="55"/><circle cx="150" cy="690" r="55"/><circle cx="150" cy="800" r="55"/><circle cx="150" cy="910" r="55"/>
+        <circle cx="900" cy="360" r="55"/><circle cx="900" cy="470" r="55"/><circle cx="900" cy="580" r="55"/><circle cx="900" cy="690" r="55"/><circle cx="900" cy="800" r="55"/><circle cx="900" cy="910" r="55"/>
+      </g>
+      <clipPath id="aiCupL"><rect x="90" y="340" width="120" height="320"/></clipPath>
+      <clipPath id="aiCupR"><rect x="780" y="330" width="100" height="300"/></clipPath>
+    </defs>
+    <g class="ai-arm" fill="none" stroke-linecap="round">
+      <path d="M900 770Q1040 700 1115 580" stroke="#141414" stroke-width="150"/>
+      <path d="M900 770Q1040 700 1115 580" stroke="#08d03c" stroke-width="104"/>
+    </g>
+    <ellipse cx="85" cy="500" rx="70" ry="135" fill="#fff" stroke="#141414" stroke-width="26"/>
+    <ellipse cx="85" cy="500" rx="58" ry="123" fill="#6fe32a" clip-path="url(#aiCupL)"/>
+    <use href="#aiBody" fill="#141414" stroke="#141414" stroke-width="44"/>
+    <use href="#aiBody" fill="#08d03c"/>
+    <g class="ai-eye"><circle cx="378" cy="483" r="78" fill="#fff05f"/><circle cx="378" cy="483" r="52" fill="#1d1d1d"/></g>
+    <g class="ai-eye"><circle cx="605" cy="483" r="78" fill="#fff05f"/><circle cx="605" cy="483" r="52" fill="#1d1d1d"/></g>
+    <path d="M450 582Q495 628 540 582" fill="none" stroke="#1d1d1d" stroke-width="24" stroke-linecap="round"/>
+    <g fill="none" stroke-linecap="round">
+      <path d="M90 410C90 180 290 62 490 62C700 62 893 180 893 370" stroke="#141414" stroke-width="74"/>
+      <path d="M90 410C90 180 290 62 490 62C700 62 893 180 893 370" stroke="#fff" stroke-width="32"/>
+      <path d="M860 610Q800 718 650 726" stroke="#141414" stroke-width="46"/>
+      <path d="M860 610Q800 718 650 726" stroke="#fff" stroke-width="16"/>
+    </g>
+    <ellipse cx="895" cy="480" rx="95" ry="130" fill="#fff" stroke="#141414" stroke-width="26"/>
+    <ellipse cx="895" cy="480" rx="83" ry="118" fill="#6fe32a" clip-path="url(#aiCupR)"/>
+    <path d="M880 352V608" stroke="#141414" stroke-width="16"/>
+    <rect x="550" y="675" width="125" height="100" rx="50" fill="#fff" stroke="#141414" stroke-width="24"/>
+  </svg>
 </button>
 
 <aside class="set-panel" id="setPanel" role="dialog" aria-label="화면 설정" aria-hidden="true">
