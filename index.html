@@ -75,6 +75,14 @@
   .gnb a{position:relative;padding:6px 0;opacity:.92}
   .gnb a::after{content:"";position:absolute;left:0;bottom:0;width:0;height:2px;background:var(--green);transition:.25s}
   .gnb a:hover::after{width:100%}
+  .gnb-item{position:relative;display:flex}
+  .gnb-item:hover > a::after,.gnb-item:focus-within > a::after{width:100%}
+  .gnb-sub{position:absolute;top:calc(100% + 14px);left:50%;min-width:168px;padding:10px 0;background:rgba(0,0,0,.8);border-top:2px solid var(--green);opacity:0;visibility:hidden;transform:translate(-50%,6px);transition:opacity .2s,transform .2s,visibility .2s}
+  .gnb-sub::before{content:"";position:absolute;left:0;right:0;top:-16px;height:16px}
+  .gnb-item:hover .gnb-sub,.gnb-item:focus-within .gnb-sub{opacity:1;visibility:visible;transform:translate(-50%,0)}
+  .gnb-sub a{display:block;padding:9px 20px;font-size:13px;text-align:center;white-space:nowrap;opacity:1;transition:color .2s,background .2s}
+  .gnb-sub a::after{display:none}
+  .gnb-sub a:hover,.gnb-sub a:focus-visible{color:var(--green);background:rgba(255,255,255,.08)}
   .util{display:flex;align-items:center;gap:22px;font-size:13px}
   .util .lang{font-family:'Montserrat',sans-serif;font-weight:600;letter-spacing:1px}
   .burger{width:26px;height:18px;position:relative}
@@ -412,10 +420,19 @@
         <a href="#exhibition">전시</a>
         <a href="#collection">소장품</a>
         <a href="#events">교육/프로그램</a>
-        <a href="#book">자료</a>
+        <a href="#book">보도자료</a>
         <a href="#together">참여</a>
-        <a href="#store">뮤지엄샵</a>
-        <a href="#notice">미술관소개</a>
+        <a href="#store">뮤지엄숍</a>
+        <div class="gnb-item">
+          <a href="#notice">미술관소개</a>
+          <ul class="gnb-sub">
+            <li><a href="#notice">인사말</a></li>
+            <li><a href="#notice">연혁</a></li>
+            <li><a href="#notice">M.I(상징 체계)</a></li>
+            <li><a href="#notice">층별안내</a></li>
+            <li><a href="#notice">조직 및 운영</a></li>
+          </ul>
+        </div>
       </nav>
       <div class="util">
         <a href="#" class="lang">ENG</a>
@@ -774,7 +791,7 @@
       <a href="#exhibition">전시</a>
       <a href="#collection">소장품</a>
       <a href="#events">교육/프로그램</a>
-      <a href="#store">뮤지엄샵</a>
+      <a href="#store">뮤지엄숍</a>
       <a href="#notice">공지사항</a>
     </div>
   </div>
