@@ -110,6 +110,27 @@
   .slide > img{position:absolute;inset:0;transform:scale(1.06);transition:transform 6s ease}
   .slide.on > img{transform:scale(1)}
   .slide .shade{position:absolute;inset:0;background:linear-gradient(90deg,rgba(0,0,0,.7) 0%,rgba(0,0,0,.25) 58%,rgba(0,0,0,.3) 100%),linear-gradient(0deg,rgba(0,0,0,.45),transparent 45%)}
+  .slides.is-promo{height:auto;background:#eef3ef}
+  .slide.promo{position:relative;display:flex;align-items:center;justify-content:space-between;gap:40px;padding:64px 76px;background:#eef3ef;overflow:hidden}
+  .slide.promo::before{content:"";position:absolute;right:-120px;top:-160px;width:520px;height:520px;border-radius:50%;background:radial-gradient(circle,rgba(63,179,79,.12),rgba(63,179,79,0) 70%);pointer-events:none}
+  .pr-copy{position:relative;z-index:1;opacity:0;transform:translateY(14px);transition:opacity .8s ease .1s,transform .8s ease .1s}
+  .pr-kicker{display:block;font-size:13px;font-weight:600;letter-spacing:1.5px;color:var(--green-dark)}
+  .pr-copy h2{margin-top:18px;font-size:clamp(26px,2.6vw,34px);font-weight:700;line-height:1.4;letter-spacing:-.5px;color:var(--ink)}
+  .pr-copy p{margin-top:18px;font-size:15px;color:#666}
+  .pr-tag{position:relative;z-index:1;font-family:'Cormorant Garamond',Georgia,serif;font-style:italic;font-weight:600;font-size:clamp(36px,4.4vw,58px);line-height:1;color:var(--green-dark);white-space:nowrap;opacity:0;transform:translateX(24px);transition:opacity 1s ease .35s,transform 1s ease .35s}
+  .slide.promo.on .pr-copy,.slide.promo.on .pr-tag{opacity:1;transform:none}
+  @media (max-width:900px){.slide.promo{flex-direction:column;align-items:flex-start;padding:48px 32px}}
+  @media (max-width:680px){.slide.promo{padding:40px 24px}}
+  .sl-kicker{display:block;font-size:13px;font-weight:700;letter-spacing:3px;color:#7ee08a}
+  .slide.is-intro .sl-copy h2{margin-top:14px}
+  .slide.is-intro .sl-sub{font-size:16px;margin-top:14px}
+  .slide.is-intro .sl-copy{top:52px;bottom:auto}
+  .slide.is-intro .shade{background:linear-gradient(90deg,rgba(0,0,0,.55) 0%,rgba(0,0,0,.15) 60%,rgba(0,0,0,0) 100%),linear-gradient(180deg,rgba(0,0,0,.5),transparent 60%)}
+  .slide.is-poster > img{filter:blur(18px) saturate(1.2);transform:scale(1.2)}
+  .slide.is-poster.on > img{transform:scale(1.15)}
+  .sl-poster{position:absolute;left:50%;top:40px;bottom:116px;aspect-ratio:1/1;z-index:2;box-shadow:0 18px 40px rgba(0,0,0,.35);opacity:0;transform:translate(-50%,16px);transition:opacity .9s ease .3s,transform .9s ease .3s}
+  .slide.on .sl-poster{opacity:1;transform:translate(-50%,0)}
+  .sl-poster img{width:100%;height:100%;object-fit:cover;display:block}
   .slide .tagline{position:absolute;right:48px;top:40px;z-index:2;font-family:'Cormorant Garamond',serif;font-style:italic;font-size:clamp(20px,2.2vw,30px);color:#fff;opacity:.95}
   .sl-copy{position:absolute;left:52px;bottom:52px;z-index:2;color:#fff;max-width:640px}
   .label{display:inline-block;border:1px solid rgba(255,255,255,.7);padding:6px 14px;font-size:12px;letter-spacing:.5px}
@@ -274,9 +295,31 @@
   /* the box takes the image's own ratio, so there is no empty space around it */
   .dt-visual{margin-top:32px;display:flex;justify-content:center}
   .dt-visual img{width:auto;height:auto;max-width:100%;max-height:min(80vh,820px)}
+  .dt-gallery{margin-top:32px;outline:none}
+  .g-stage{position:relative;aspect-ratio:3/2;max-height:min(78vh,760px);width:100%;overflow:hidden;background:#111;touch-action:pan-y;user-select:none}
+  .g-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transform:scale(1.03);transition:opacity .7s ease,transform 1.2s ease;pointer-events:none}
+  .g-img.on{opacity:1;transform:none}
+  .g-nav{position:absolute;top:50%;z-index:2;width:52px;height:52px;margin-top:-26px;display:grid;place-items:center;border-radius:50%;background:rgba(0,0,0,.35);color:#fff;transition:background .2s}
+  .g-nav:hover,.g-nav:focus-visible{background:rgba(0,0,0,.65)}
+  .g-nav svg{width:24px;height:24px}
+  .g-prev{left:20px}
+  .g-next{right:20px}
+  .g-count{position:absolute;right:20px;bottom:18px;z-index:2;padding:6px 14px;border-radius:20px;background:rgba(0,0,0,.5);color:rgba(255,255,255,.8);font-size:13px;letter-spacing:1px}
+  .g-count b{color:#fff;font-weight:700}
+  .g-thumbs{display:flex;gap:10px;margin-top:12px;overflow-x:auto;scrollbar-width:none}
+  .g-thumbs::-webkit-scrollbar{display:none}
+  .g-thumbs button{flex:0 0 auto;width:120px;aspect-ratio:3/2;padding:0;border:2px solid transparent;opacity:.5;transition:opacity .2s,border-color .2s}
+  .g-thumbs button:hover{opacity:.85}
+  .g-thumbs button[aria-current]{opacity:1;border-color:var(--green-dark,#1f7a35)}
+  .g-thumbs img{width:100%;height:100%;object-fit:cover;display:block}
+  @media (max-width:680px){.g-nav{width:40px;height:40px;margin-top:-20px}.g-prev{left:10px}.g-next{right:10px}.g-thumbs button{width:84px}}
   .dt-body{max-width:740px;margin:44px auto 0}
   .dt-body h3{font-size:18px;font-weight:700;color:var(--ink)}
   .dt-body .desc{font-size:14px;color:#333;line-height:1.85;margin-top:18px}
+  .dt-body .desc + .desc{margin-top:14px}
+  .dt-figure{margin:36px 0 0}
+  .dt-figure img{width:100%;height:auto;display:block}
+  .dt-figure figcaption{font-size:13px;color:#666;text-align:center;margin-top:12px}
   .dt-info{display:grid;grid-template-columns:1fr 1fr;gap:28px 40px;margin-top:34px;padding:30px 0 34px;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
   .dt-info dt{font-size:12px;color:#888}
   .dt-info dd{font-size:14px;color:var(--ink);margin-top:10px}
@@ -377,6 +420,8 @@
     .tabs button{margin-right:26px;font-size:15px;padding:18px 0}
     .slides{height:460px}
     .slide .tagline{display:none}
+    .sl-poster{display:none}
+    .slide.is-poster > img,.slide.is-poster.on > img{filter:none;transform:none}
     .sl-copy{left:22px;right:22px;bottom:86px}
     .sl-copy h2{font-size:32px}
     .sl-btn{right:22px;bottom:22px}
@@ -504,11 +549,6 @@
 
       <!-- ---------- 예정 전시 ---------- -->
       <section class="panel" id="panel-upcoming" role="tabpanel" hidden>
-        <div class="coming reveal">
-          <span class="kicker">COMING SOON</span>
-          <h2>다음 시즌의 부산현대미술관</h2>
-          <p>새롭게 만날 전시를 기다려 주세요. 2026년 예정 전시는 준비 중입니다.</p>
-        </div>
         <div class="cal-bar">
           <div class="years" role="group" aria-label="연도 선택">
             <button type="button" data-year="2026" aria-pressed="true">2026</button>
@@ -622,23 +662,28 @@
       id: 're-saesae-chair', group: 'current', status: 'on', badge: '상설 전시',
       title: 'Re: 새-새-의자', sub: '재활용 플라스틱 이용 디자인 가구 등',
       lead: '재활용 플라스틱 모듈로 실용 가구를 만드는 야외 전시입니다. 폐자재로 인한 사회 환경문제에 대한 관심을 높이고자 합니다.',
-      period: '2026.03.15 – 상설', place: '지상 1층, 야외정원 등', artists: '이웅렬, 곽이브',
+      period: '2024.03.15 – 상설', place: '지상 1층, 야외정원 등', artists: '이웅렬, 곽이브',
       works: '재활용 플라스틱 이용 디자인 가구 등', curator: '김가현 학예연구사',
-      img: 'images/exhibition-thumb-01.webp', hero: 'images/hero-02.webp',
+      img: 'images/re-saesae-chair-poster.jpg', hero: 'images/re-saesae-chair-poster.jpg', poster: true,
       tagline: 'Nature, Human & New Media',
       views: 1000, type: ['audio', 'vr', 'sign', 'voice'],
-      desc: '《Re:새-새-정글》의 의의와 목적을 일회성으로 휘발하지 않기 위해, 새가 새롭게 다시 의자로 태어나는 프로젝트입니다. 조형물의 플라스틱 모듈을 이용해 실용 가구를 제작하여 폐자재로 인해 파생된 사회 환경문제에 대한 관심을 높이고자 합니다.',
+      desc: '《Re: 새-새-의자(가제)》는 2022년부터 2023년까지 진행되었던 자연과의 상생, 지속가능성을 모색한 야외 전시 《Re: 새-새-정글》의 의의와 목적을 일회성으로 휘발하지 않기 위해 새가 새롭게 다시 의자로 태어나는 프로젝트다. 《Re: 새-새-의자》라는 제목과 같이 조형물의 플라스틱 모듈을 이용해 실용 가구를 제작하여 폐자재로 인해 파생된 사회 환경문제에 대한 관심을 높이고자 한다.',
       outline: ['재활용 플라스틱 모듈 제작 과정', '실용 가구 디자인', '야외정원 설치 전경']
     },
     {
       id: 'patrick-blanc', group: 'current', status: 'on', badge: '상설 전시',
       title: '패트릭 블랑: 수직정원', sub: '자연과 예술이 함께 자라는 미술관',
       lead: '미술관 외벽을 따라 식물이 자라는 수직정원입니다. 건물과 자연이 함께 자라는 풍경을 상설로 만날 수 있습니다.',
-      period: '2018.06.16 – 상설', place: '미술관 외벽 수직정원', artists: '패트릭 블랑',
-      works: '수직정원', curator: '-',
-      img: 'images/gallery-wide.jpg', hero: 'images/hero-01.webp',
+      period: '2018.06.16 – 상설', place: '부산현대미술관 외벽', artists: '패트릭 블랑',
+      works: '설치 1점', curator: '류소영 학예연구사(현재 담당: 최상호 학예연구사)',
+      img: 'images/patrick-blanc-poster.jpg', hero: 'images/hero-01.webp',
       views: 0, type: [],
-      desc: '미술관 외벽에 조성된 수직정원입니다. 계절마다 달라지는 식물의 모습을 건물 밖에서 바로 볼 수 있습니다.',
+      desc: [
+        '부산현대미술관은 동시대미술에 특화된 미술관으로서 화이트 큐브의 전통적인 전시 형태에서 벗어나 다양한 형식의 예술 작품을 수용하고 관람객 친화적인 미술관이 되고자 고민해왔습니다. 특히, 을숙도(천연기념물 제179호)라는 상징적 장소에 위치한 미술관은 그 장소적 특성과 더불어 환경이 직면한 임박한 과제를 탐구하고 확장된 영역의 동시대미술을 아우를 수 있는 전시를 선보이고자 합니다.',
+        '〈수직정원: Vertical Garden〉展은 ‘수직정원의 창시자’이며 ‘수직정원’을 정원 예술의 한 분야로 정착시킨 세계적 명성의 식물학자 ‘패트릭 블랑’의 국내최초 대규모 실외 설치 작업으로 그린아트, 랜드아트와 같은 환경 예술과 그 맥락을 같이 합니다. 패트릭 블랑은 식물학자로서의 전문적 지식을 바탕으로 단순히 식물을 벽에 설치하는 작업이 아닌 식물의 생태와 본능을 연구하고 상호자생이 가능한 식물들을 연결 배치합니다. 더불어 시각적 미를 부각시키는 작업을 통해 식물의 본성을 넘어선 하나의 예술 작품으로 표현합니다. 이번 전시 패트릭 블랑이 부산의 식물 생태계를 직접 조사하고 연구하여 구성한 175종의 토종/토착 식물 4만 4천여 포트를 심어 표현하였습니다.',
+        '패트릭 블랑의 수직정원은 도시화와 산업화로 사라져간 자연을 인위적으로 조성하고 자연의 시스템과 흡사한 효과를 내도록 고안되었으며 미술관의 차가운 콘크리트 벽은 수직정원으로 변모하여 생물의 다양성을 위한 귀중한 보고가 될 것입니다. 이번 전시는 예술의 장르와 매체의 경계를 넘어 동시대미술에 대한 이해와 공감의 폭을 넓히는 의미 있는 전시가 될 것입니다.'
+      ],
+      figure: { src: 'images/patrick-blanc-facade.jpg', caption: '패트릭 블랑: 수직정원, 2018' },
       outline: ['수직정원 개요', '식재와 관리', '관람 안내']
     },
     {
@@ -678,10 +723,9 @@
 
   /* 샘플 예정 전시 12건: 목록 화면 확인용 가상 데이터 (실제 전시 정보로 바꿔 주세요) */
   const UPCOMING = [
-    ['up-01', '겨울 빛의 산책', '빛과 그림자로 만드는 겨울 정원', '2026.12.12 – 2027.03.01', '전시실 1 (1층)', 'images/hero-01.webp'],
+    ['up-01', '겨울 빛의 산책', '빛과 그림자로 만드는 겨울 정원', '2026.12.12 – 2027.03.01', '전시실 1 (1층)', 'images/upcoming-banner.webp'],
     ['up-02', '물결의 언어', '강과 바다를 닮은 추상 회화', '2026.12.19 – 2027.04.05', '전시실 2 (2층)', 'images/collection-04.webp'],
     ['up-03', '새로운 지구', '기후와 환경을 다룬 미디어 아트', '2027.01.15 – 2027.04.20', '전시실 4 (1층)', 'images/collection-06.webp'],
-    ['up-04', '작은 것들의 목록', '일상의 사물을 모은 설치 작업', '2027.02.05 – 2027.05.10', '전시실 3 (2층)', 'images/detail_view01.jpg'],
     ['up-05', '봄의 기록', '사진과 영상으로 담은 을숙도의 봄', '2027.03.06 – 2027.06.14', '로비 (1층)', 'images/hero-02.webp'],
     ['up-06', '조각 공원', '야외정원에 놓이는 현대 조각', '2027.03.20 – 2027.07.05', '야외정원', 'images/together-main.jpg'],
     ['up-07', '디지털 정원', '관람객과 반응하는 미디어 설치', '2027.04.17 – 2027.08.01', '전시실 4 (1층)', 'images/collection-05.webp'],
@@ -696,6 +740,16 @@
     desc: `${sub}을(를) 주제로 한 예정 전시입니다. 전시 소개는 확정되는 대로 안내해 드립니다.`,
     outline: ['전시 개요 준비 중']
   }));
+  const UP_DESC = {
+    'up-01': '《겨울 빛의 산책》은 눈 덮인 수직정원과 겨울 햇살이 만드는 빛과 그림자를 따라 걷는 전시입니다. 계절에 따라 달라지는 미술관의 풍경을 사진, 영상, 설치 작업으로 담아 관람객이 겨울 정원 속을 천천히 산책하듯 감상할 수 있도록 구성했습니다. 차가운 계절 속에서도 이어지는 생명의 리듬을 느껴 보세요.'
+  };
+  const UP_GALLERY = {
+    'up-01': ['images/upcoming-banner.webp', 'images/winter-walk-01.webp', 'images/winter-walk-02.webp', 'images/winter-walk-03.webp', 'images/winter-walk-04.webp']
+  };
+  UPCOMING.forEach(e => {
+    if (UP_DESC[e.id]) e.desc = UP_DESC[e.id];
+    if (UP_GALLERY[e.id]) e.gallery = UP_GALLERY[e.id];
+  });
 
   /* 샘플 현재 전시 10건: 목록 화면 확인용 가상 데이터 (실제 전시 정보로 바꿔 주세요) */
   const SAMPLE = [
@@ -719,6 +773,10 @@
   })));
 
   /* hero slides per tab */
+  const INTRO = {
+    past: { promo: true, kicker: 'EXHIBITION ARCHIVE', title: ['온라인 아카이브에서', '다시 만나는 지난 전시'], sub: '지난 전시를 온라인에서 다시 볼 수 있습니다.', tagline: 'Art, beyond time.' },
+    upcoming: { img: 'images/upcoming-banner.webp', kicker: 'COMING SOON', title: '다음 시즌의 부산현대미술관', sub: '새롭게 만날 전시를 기다려 주세요. 2026년 예정 전시는 준비 중입니다.' }
+  };
   const SLIDES = { current: ['re-saesae-chair', 'patrick-blanc'], upcoming: ['up-01', 'up-02', 'up-03'], past: ['gray-box', 'eyes', 'wonder-turn'] };
 
   const TYPE_LABEL = { audio: '오디오가이드', vr: 'VR 전시', sign: '수어해설', voice: '음성해설' };
@@ -797,12 +855,51 @@
   let slideItems = [], cur = 0, timer = null, paused = false;
 
   function renderSlides(tab) {
+    $('#slides').classList.toggle('is-promo', !!(INTRO[tab] && INTRO[tab].promo));
+    if (INTRO[tab] && INTRO[tab].promo) {
+      const t = INTRO[tab];
+      slideItems = [t];
+      $('#slides').innerHTML = `
+      <article class="slide on promo" aria-hidden="false">
+        <div class="pr-copy">
+          <span class="pr-kicker">${esc(t.kicker)}</span>
+          <h2>${t.title.map(esc).join('<br>')}</h2>
+          <p>${esc(t.sub)}</p>
+        </div>
+        <p class="pr-tag" aria-hidden="true">${esc(t.tagline)}</p>
+      </article>`;
+      $('#sPrev').hidden = true;
+      $('#sNext').hidden = true;
+      setSlide(0);
+      clearInterval(timer);
+      return;
+    }
+    if (INTRO[tab]) {
+      const t = INTRO[tab];
+      slideItems = [t];
+      $('#slides').innerHTML = `
+      <article class="slide on is-intro" aria-hidden="false">
+        <img src="${t.img}" alt="">
+        <div class="shade"></div>
+        <div class="sl-copy">
+          <span class="sl-kicker">${esc(t.kicker)}</span>
+          <h2>${esc(t.title)}</h2>
+          <p class="sl-sub">${esc(t.sub)}</p>
+        </div>
+      </article>`;
+      $('#sPrev').hidden = true;
+      $('#sNext').hidden = true;
+      setSlide(0);
+      clearInterval(timer);
+      return;
+    }
     slideItems = SLIDES[tab].map(id => all().find(x => x.id === id)).filter(Boolean);
     $('#slides').innerHTML = slideItems.map((e, i) => `
-      <article class="slide${i === 0 ? ' on' : ''}" aria-hidden="${i === 0 ? 'false' : 'true'}">
+      <article class="slide${i === 0 ? ' on' : ''}${e.poster ? ' is-poster' : ''}" aria-hidden="${i === 0 ? 'false' : 'true'}">
         <img src="${e.hero}" alt="">
         <div class="shade"></div>
-        ${e.tagline ? `<p class="tagline">${esc(e.tagline)}</p>` : ''}
+        ${e.poster ? `<div class="sl-poster"><img src="${e.hero}" alt="${esc(e.title)} 포스터"></div>` : ''}
+        ${e.tagline && !e.poster ? `<p class="tagline">${esc(e.tagline)}</p>` : ''}
         <div class="sl-copy">
           <span class="label">${esc(e.badge)}</span>
           <h2>${esc(e.title)}</h2>
@@ -872,10 +969,22 @@
           </div>
         </div>
       </div>
-      <div class="dt-visual reveal"><img src="${e.img}" alt="${esc(e.title)} 작품 이미지"></div>
+      ${e.gallery ? `
+      <div class="dt-gallery reveal" id="dtGallery" tabindex="0" aria-roledescription="carousel" aria-label="${esc(e.title)} 이미지 슬라이드">
+        <div class="g-stage">
+          ${e.gallery.map((src, i) => `<img class="g-img${i === 0 ? ' on' : ''}" src="${src}" alt="${esc(e.title)} 이미지 ${i + 1}" ${i ? 'loading="lazy"' : ''}>`).join('')}
+          <button type="button" class="g-nav g-prev" aria-label="이전 이미지"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M15 5l-7 7 7 7"/></svg></button>
+          <button type="button" class="g-nav g-next" aria-label="다음 이미지"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M9 5l7 7-7 7"/></svg></button>
+          <p class="g-count" aria-live="polite"><b>1</b> / ${e.gallery.length}</p>
+        </div>
+        <div class="g-thumbs">
+          ${e.gallery.map((src, i) => `<button type="button" data-g="${i}" aria-label="${i + 1}번 이미지 보기"${i === 0 ? ' aria-current="true"' : ''}><img src="${src}" alt="" loading="lazy"></button>`).join('')}
+        </div>
+      </div>` : `<div class="dt-visual reveal"><img src="${e.detailImg || e.img}" alt="${esc(e.title)} 작품 이미지"></div>`}
       <div class="dt-body reveal">
         <h3>전시개요</h3>
-        <p class="desc">${esc(e.desc)}</p>
+        ${[].concat(e.desc).map(t => `<p class="desc">${esc(t)}</p>`).join('')}
+        ${e.figure ? `<figure class="dt-figure"><img src="${e.figure.src}" alt="${esc(e.figure.caption)}" loading="lazy"><figcaption>${esc(e.figure.caption)}</figcaption></figure>` : ''}
         <dl class="dt-info">
           <div><dt>기간</dt><dd>${esc(e.period)}</dd></div>
           <div><dt>참여작가</dt><dd>${esc(e.artists)}</dd></div>
@@ -895,8 +1004,38 @@
       }
     }));
     $('#detailBody').querySelectorAll('[data-sns]').forEach(s => s.addEventListener('click', () => shareTo(s.dataset.sns, e)));
+    if (e.gallery) initGallery($('#dtGallery'));
     play('#panel-detail');
     $('#panel-detail').scrollIntoView({ block: 'start' });
+  }
+
+  /* ---------- detail image slider ---------- */
+  function initGallery(box) {
+    const imgs = [...box.querySelectorAll('.g-img')];
+    const thumbs = [...box.querySelectorAll('[data-g]')];
+    const count = box.querySelector('.g-count b');
+    let at = 0, sx = null;
+    const go = i => {
+      at = (i + imgs.length) % imgs.length;
+      imgs.forEach((im, k) => im.classList.toggle('on', k === at));
+      thumbs.forEach((t, k) => t.toggleAttribute('aria-current', k === at));
+      count.textContent = at + 1;
+      thumbs[at].scrollIntoView({ block: 'nearest', inline: 'nearest' });
+    };
+    box.querySelector('.g-prev').addEventListener('click', () => go(at - 1));
+    box.querySelector('.g-next').addEventListener('click', () => go(at + 1));
+    thumbs.forEach(t => t.addEventListener('click', () => go(+t.dataset.g)));
+    box.addEventListener('keydown', ev => {
+      if (ev.key === 'ArrowLeft') { ev.preventDefault(); go(at - 1); }
+      if (ev.key === 'ArrowRight') { ev.preventDefault(); go(at + 1); }
+    });
+    const stage = box.querySelector('.g-stage');
+    stage.addEventListener('pointerdown', ev => { sx = ev.clientX; });
+    stage.addEventListener('pointerup', ev => {
+      if (sx === null) return;
+      const dx = ev.clientX - sx; sx = null;
+      if (Math.abs(dx) > 40) go(at + (dx < 0 ? 1 : -1));
+    });
   }
 
   /* ---------- SNS share ---------- */
