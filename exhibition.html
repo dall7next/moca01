@@ -221,6 +221,7 @@
   .card .frame img{transition:transform .6s}
   .card:hover .frame img{transform:scale(1.05)}
   .card .frame{position:relative}
+  .card .dday{position:absolute;left:14px;top:14px;z-index:1;padding:5px 11px;border-radius:999px;background:var(--green);color:#fff;font-family:'Montserrat',sans-serif;font-size:12px;font-weight:700;letter-spacing:.5px;line-height:1.2}
   .card .card-icos{position:absolute;left:50%;top:50%;z-index:1;display:flex;gap:10px;transform:translate(-50%,-50%);pointer-events:none}
   .card .audio-ico{display:grid;place-items:center;width:64px;height:64px;border-radius:50%;background:rgba(0,0,0,.45);border:1.5px solid rgba(255,255,255,.85);color:#fff;-webkit-backdrop-filter:blur(4px);backdrop-filter:blur(4px);transition:background .25s,transform .25s}
   .card .audio-ico svg{width:30px;height:30px}
@@ -318,6 +319,7 @@
   .dt-audio h3{font-size:17px;font-weight:700;margin-bottom:12px}
   .au-list{list-style:none;margin:0;padding:0}
   .au-list li{display:grid;grid-template-columns:1fr minmax(240px,320px) auto;align-items:center;gap:20px;padding:14px 0;border-bottom:1px solid #e2e4e0}
+  .au-list li.no-player{grid-template-columns:1fr auto}
   .au-name{margin:0;font-size:15px;font-weight:600;color:var(--ink)}
   .au-name span{display:block;margin-top:2px;font-size:13px;font-weight:400;color:#777}
   .au-list audio{width:100%;height:40px}
@@ -725,10 +727,20 @@
       id: 'gray-box', group: 'past', status: 'end', badge: '지난 전시',
       title: '그레이박스 이후 : 수집에서 전시까지', sub: '기술과 시간, 뉴미디어의 또 다른 가능성',
       lead: '뉴미디어 작품의 매체 특성과 전시 공간의 역사적 변화를 살핍니다.',
-      period: '2022.04.15 – 07.17', place: '전시실 2 (2층)', artists: '윤지원, 하룬 파로키',
+      period: '2022.04.15 – 07.17', place: '전시실 2 (2층)', artists: '권하윤, 김희천, 노재운, 람한, 윤지원, 정윤선, PCS×김홍석, SUJANGGO수장고×최하늘, 북 코직, 하룬 파로키, 히토 슈타이얼',
       works: '소장품 기획전', curator: '김가현 학예연구사',
       img: 'images/exhibition-main.jpg', hero: 'images/exhibition-main.jpg',
       views: 1000, type: ['audio', 'vr'],
+      // 누리집 온라인 미술관 > 오디오 가이드 (https://www.busan.go.kr/moca/exhibition0401/1528268), 화면설계서 p.10
+      audio: { title: '오디오 가이드', ytLabel: '오디오 가이드 듣기', tracks: [
+        ['#01 그레이박스 이후: 수집에서 전시까지', 'z4ZC3i31qaM'], ['#02 윤지원_무제 (동영상 루트)', 'o--Ty7ZMPSM'],
+        ['#03 하룬 파로키_인터페이스', '4Wbanczyk4g'], ['#04 수장고', '-SKNANPGIMg'],
+        ['#05 수장고x최하늘_스트레칭 하는 애', 'UQ-X7ltJHF4'], ['#06 PCSx김홍석_PCS_수집기관 PCS로부터의 초대장', 'QvYnjRVZMsc'],
+        ['#07 PCSx김홍석_김홍석_좋은 비평 나쁜 비평 이상한 비평', '3OM_daGWYVw'], ['#08 정윤선_길 위의 진실', 'Y_rFdPpvYEw'],
+        ['#09 권하윤_489년', 'ZK2ylCpBILg'], ['#10 노재운_버려진', 'ok6PKHWAayQ'],
+        ['#11 북코직_아스키', '9I8_XJ_xxUo'], ['#12 히토 슈타이얼_타워', 'z4_rp7oTwQA'],
+        ['#13 람한_룸 타입 (외톨이 시리즈)', 'FRNJWZ2ml3Q'], ['#14 김희천_썰매', 'TqejP0C5oUo']
+      ].map(([name, id]) => ({ name, yt: 'https://youtu.be/' + id })) },
       desc: '기술 매체의 발전과의 관계 속에서 전개되는 뉴미디어 작품의 매체 특성과 전시 공간의 역사적 변화를 조망합니다. 기술·시간 기반 작품의 수집과 보존, 전시에 요구되는 현안을 소장 작품을 통해 살핍니다.',
       outline: ['그레이박스 이후 : 수집에서 전시까지', '윤지원 _ 무제 (동영상 루프)', '하룬 파로키 _ 인터페이스']
     },
@@ -808,6 +820,18 @@
     ]
   };
   { const t = PAST_MOCA.find(e => e.id === 'moca-1761381'); if (t) t.audio = VOICE_HYBRIDS; }
+  // 화면설계서 p.14~15: 음성해설 목록과 상세에 《열 개의 눈》 전시 3부 - 혼종체를 별도 항목으로 표시
+  PAST_MOCA.push({
+    id: 'moca-1676160', group: 'past', status: 'end', badge: '지난 전시',
+    title: '《열 개의 눈》 전시 3부 - 혼종체', sub: '음성으로 만나는 《열 개의 눈》 3부', lead: '음성으로 만나는 《열 개의 눈》 3부',
+    period: '2025.05.03 – 2025.09.07', place: '부산현대미술관 전시실 4 및 로비 (1층)',
+    artists: '김덕희, 김은설, 엄정순, 조영주, 홍보미, SEOM:(엄예슬, 서하늬), 김채린, 라움콘(송지은, Q레이터), 라일라(이수연), 정연두, 미션잇(김병수), 다이앤 보르사토, 라파엘 드 그루트, 로버트 모리스, 에밀리 루이스 고시오, 카르멘 파파리아, 피네건 샤논, 해미 클레멘세비츠',
+    works: '드로잉, 회화, 조각, 설치, 퍼포먼스, 디자인, 아카이브, 만화, 벽화 등 총 70점', curator: '박한나 학예연구사',
+    img: MOCA_IMG('1676160', 'L'), hero: MOCA_IMG('1676160'), detailImg: MOCA_IMG('1676160'),
+    views: 0, type: ['voice'], audio: VOICE_HYBRIDS,
+    desc: '《열 개의 눈》 전시 3부 「혼종체」의 음성해설입니다. 라파엘 드 그루트, 에밀리 루이스 고시오, 김덕희, 김채린의 작품을 작가와 해설자의 목소리로 소개하며, 국문·영문 음성 스크립트를 함께 제공합니다.',
+    outline: ['전시 개요', '참여 작가', '음성해설'], source: 'https://www.busan.go.kr/moca/bfart02/1676160'
+  });
 
   PAST_MOCA.push({
     id: 'moca-1676144', group: 'past', status: 'end', badge: '지난 전시',
@@ -911,15 +935,18 @@
     const key = e => (e.period.match(/\d{4}\.\d{2}\.\d{2}/) || [''])[0];
     past.sort((a, b) => key(b).localeCompare(key(a)));
     // 《열 개의 눈》 수어해설은 목록 맨 앞에 고정
-    const pin = past.findIndex(e => e.id === 'moca-1676144');
-    if (pin > 0) past.unshift(...past.splice(pin, 1));
+    // 그다음 《열 개의 눈》 전시 3부 - 혼종체(음성해설) 순서로 고정
+    ['moca-1676160', 'moca-1676144'].forEach(id => {
+      const pin = past.findIndex(e => e.id === id);
+      if (pin > 0) past.unshift(...past.splice(pin, 1));
+    });
     EXH.splice(at, EXH.length - at, ...past);
   }
 
   /* hero slides per tab */
   const INTRO = {
     past: { promo: true, kicker: 'EXHIBITION ARCHIVE', title: ['온라인 아카이브에서', '다시 만나는 지난 전시'], sub: '지난 전시를 온라인에서 다시 볼 수 있습니다.', tagline: 'Art, beyond time.' },
-    upcoming: { seasons: [['봄','images/season-spring.webp'],['여름','images/season-summer.webp'],['가을','images/season-autumn.webp'],['겨울','images/upcoming-banner.webp']], kicker: 'COMING SOON', title: '다음 시즌의 부산현대미술관', sub: '새롭게 만날 전시를 기다려 주세요. 2026년 예정 전시는 준비 중입니다.' }
+    upcoming: { seasons: [['봄','images/season-spring.webp'],['여름','images/season-summer.webp'],['가을','images/season-autumn.webp'],['겨울','images/upcoming-banner.webp']], kicker: 'COMING SOON', title: '다음 시즌의 부산현대미술관', sub: '예정전시를 주목하세요' }
   };
   const SLIDES = { current: ['re-saesae-chair', 'patrick-blanc'], upcoming: ['up-01', 'up-02', 'up-03'], past: ['gray-box', 'eyes', 'wonder-turn'] };
 
@@ -960,9 +987,19 @@
     const icons = (e.type.includes('vr') ? VR_ICO : '') + (e.type.includes('audio') ? AUDIO_ICO : '') + (e.type.includes('sign') ? SIGN_ICO : '') + (e.type.includes('voice') ? VOICE_ICO : '');
     return icons ? `<span class="card-icos">${icons}</span>` : '';
   };
+  // 예정 전시 카드: 시작일까지 남은 날 (화면설계서 p.5 'D-15' 표시)
+  const dDay = e => {
+    if (e.group !== 'upcoming') return '';
+    const m = e.period.match(/(\d{4})\.(\d{2})\.(\d{2})/);
+    if (!m) return '';
+    const now = new Date(); now.setHours(0, 0, 0, 0);
+    const n = Math.round((new Date(+m[1], m[2] - 1, +m[3]) - now) / 86400000);
+    if (n < 0) return '';
+    return `<span class="dday" aria-label="개막까지 ${n}일">${n === 0 ? 'D-DAY' : 'D-' + n}</span>`;
+  };
   function card(e) {
     return `<a class="card reveal" href="#detail/${e.id}">
-      <div class="frame"><img src="${e.img}" alt="${esc(e.title)} 대표 이미지" loading="lazy">${cardIcons(e)}</div>
+      <div class="frame"><img src="${e.img}" alt="${esc(e.title)} 대표 이미지" loading="lazy">${cardIcons(e)}${dDay(e)}</div>
       <span class="kind ${e.status === 'end' ? 'end' : ''}">${esc(e.badge)}</span>
       <h4>${esc(e.title)}</h4>
       <p>${esc(e.sub)}</p>
@@ -1181,10 +1218,10 @@
       <section class="dt-audio reveal" aria-label="${esc(e.audio.title)}">
         <h3>${esc(e.audio.title)}</h3>
         <ol class="au-list">
-          ${e.audio.tracks.map(t => `<li>
-            <p class="au-name">${esc(t.name)}<span>(${esc(t.voice)})</span></p>
-            <audio controls preload="none" src="${t.src}" aria-label="${esc(t.name)} 음성해설"></audio>
-            ${t.yt ? `<a class="au-yt" href="${t.yt}" target="_blank" rel="noopener">유튜브로 듣기</a>` : ''}
+          ${e.audio.tracks.map(t => `<li${t.src ? '' : ' class="no-player"'}>
+            <p class="au-name">${esc(t.name)}${t.voice ? `<span>(${esc(t.voice)})</span>` : ''}</p>
+            ${t.src ? `<audio controls preload="none" src="${t.src}" aria-label="${esc(t.name)} 음성해설"></audio>` : ''}
+            ${t.yt ? `<a class="au-yt" href="${t.yt}" target="_blank" rel="noopener">${esc(e.audio.ytLabel || '유튜브로 듣기')}</a>` : ''}
           </li>`).join('')}
         </ol>
         ${(e.audio.scripts || []).map(s => `<a class="au-script" href="${s.href}" target="_blank" rel="noopener">${esc(s.label)}</a>`).join('')}
