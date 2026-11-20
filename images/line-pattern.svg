@@ -1,0 +1,131 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2000 440" preserveAspectRatio="xMidYMid slice">
+  <g fill="none" stroke="#fff" stroke-width="1.1" stroke-linecap="round">
+    <path transform="translate(0 0)" d="M-120 150 C 260 40, 520 420, 960 340 S 1560 140, 2120 250"/>
+    <path transform="translate(0 5)" d="M-120 150 C 260 40, 520 420, 960 340 S 1560 140, 2120 250"/>
+    <path transform="translate(0 10)" d="M-120 150 C 260 40, 520 420, 960 340 S 1560 140, 2120 250"/>
+    <path transform="translate(0 15)" d="M-120 150 C 260 40, 520 420, 960 340 S 1560 140, 2120 250"/>
+    <path transform="translate(0 20)" d="M-120 150 C 260 40, 520 420, 960 340 S 1560 140, 2120 250"/>
+    <path transform="translate(0 25)" d="M-120 150 C 260 40, 520 420, 960 340 S 1560 140, 2120 250"/>
+    <path transform="translate(0 30)" d="M-120 150 C 260 40, 520 420, 960 340 S 1560 140, 2120 250"/>
+    <path transform="translate(0 35)" d="M-120 150 C 260 40, 520 420, 960 340 S 1560 140, 2120 250"/>
+    <path transform="translate(0 40)" d="M-120 150 C 260 40, 520 420, 960 340 S 1560 140, 2120 250"/>
+    <path transform="translate(0 45)" d="M-120 150 C 260 40, 520 420, 960 340 S 1560 140, 2120 250"/>
+    <path transform="translate(0 50)" d="M-120 150 C 260 40, 520 420, 960 340 S 1560 140, 2120 250"/>
+    <path transform="translate(0 55)" d="M-120 150 C 260 40, 520 420, 960 340 S 1560 140, 2120 250"/>
+    <path transform="translate(0 60)" d="M-120 150 C 260 40, 520 420, 960 340 S 1560 140, 2120 250"/>
+    <path transform="translate(0 65)" d="M-120 150 C 260 40, 520 420, 960 340 S 1560 140, 2120 250"/>
+    <path transform="translate(0 0)" d="M-120 430 C 380 330, 700 -10, 1120 30 S 1720 400, 2120 330"/>
+    <path transform="translate(0 5)" d="M-120 430 C 380 330, 700 -10, 1120 30 S 1720 400, 2120 330"/>
+    <path transform="translate(0 10)" d="M-120 430 C 380 330, 700 -10, 1120 30 S 1720 400, 2120 330"/>
+    <path transform="translate(0 15)" d="M-120 430 C 380 330, 700 -10, 1120 30 S 1720 400, 2120 330"/>
+    <path transform="translate(0 20)" d="M-120 430 C 380 330, 700 -10, 1120 30 S 1720 400, 2120 330"/>
+    <path transform="translate(0 25)" d="M-120 430 C 380 330, 700 -10, 1120 30 S 1720 400, 2120 330"/>
+    <path transform="translate(0 30)" d="M-120 430 C 380 330, 700 -10, 1120 30 S 1720 400, 2120 330"/>
+    <path transform="translate(0 35)" d="M-120 430 C 380 330, 700 -10, 1120 30 S 1720 400, 2120 330"/>
+    <path transform="translate(0 40)" d="M-120 430 C 380 330, 700 -10, 1120 30 S 1720 400, 2120 330"/>
+    <path transform="translate(0 45)" d="M-120 430 C 380 330, 700 -10, 1120 30 S 1720 400, 2120 330"/>
+    <path transform="translate(0 50)" d="M-120 430 C 380 330, 700 -10, 1120 30 S 1720 400, 2120 330"/>
+    <path transform="translate(0 55)" d="M-120 430 C 380 330, 700 -10, 1120 30 S 1720 400, 2120 330"/>
+    <path transform="translate(0 60)" d="M-120 430 C 380 330, 700 -10, 1120 30 S 1720 400, 2120 330"/>
+    <path transform="translate(0 65)" d="M-120 430 C 380 330, 700 -10, 1120 30 S 1720 400, 2120 330"/>
+    <path transform="translate(0 0)" d="M560 -60 C 780 120, 980 300, 1340 500"/>
+    <path transform="translate(5 0)" d="M560 -60 C 780 120, 980 300, 1340 500"/>
+    <path transform="translate(10 0)" d="M560 -60 C 780 120, 980 300, 1340 500"/>
+    <path transform="translate(15 0)" d="M560 -60 C 780 120, 980 300, 1340 500"/>
+    <path transform="translate(20 0)" d="M560 -60 C 780 120, 980 300, 1340 500"/>
+    <path transform="translate(25 0)" d="M560 -60 C 780 120, 980 300, 1340 500"/>
+    <path transform="translate(30 0)" d="M560 -60 C 780 120, 980 300, 1340 500"/>
+    <path transform="translate(35 0)" d="M560 -60 C 780 120, 980 300, 1340 500"/>
+    <path transform="translate(40 0)" d="M560 -60 C 780 120, 980 300, 1340 500"/>
+    <path transform="translate(45 0)" d="M560 -60 C 780 120, 980 300, 1340 500"/>
+    <path transform="translate(50 0)" d="M560 -60 C 780 120, 980 300, 1340 500"/>
+    <path transform="translate(55 0)" d="M560 -60 C 780 120, 980 300, 1340 500"/>
+    <path transform="translate(60 0)" d="M560 -60 C 780 120, 980 300, 1340 500"/>
+    <path transform="translate(0 0)" d="M1240 500 C 1480 300, 1780 200, 2120 40"/>
+    <path transform="translate(5 0)" d="M1240 500 C 1480 300, 1780 200, 2120 40"/>
+    <path transform="translate(10 0)" d="M1240 500 C 1480 300, 1780 200, 2120 40"/>
+    <path transform="translate(15 0)" d="M1240 500 C 1480 300, 1780 200, 2120 40"/>
+    <path transform="translate(20 0)" d="M1240 500 C 1480 300, 1780 200, 2120 40"/>
+    <path transform="translate(25 0)" d="M1240 500 C 1480 300, 1780 200, 2120 40"/>
+    <path transform="translate(30 0)" d="M1240 500 C 1480 300, 1780 200, 2120 40"/>
+    <path transform="translate(35 0)" d="M1240 500 C 1480 300, 1780 200, 2120 40"/>
+    <path transform="translate(40 0)" d="M1240 500 C 1480 300, 1780 200, 2120 40"/>
+    <path transform="translate(45 0)" d="M1240 500 C 1480 300, 1780 200, 2120 40"/>
+    <path transform="translate(50 0)" d="M1240 500 C 1480 300, 1780 200, 2120 40"/>
+    <path transform="translate(55 0)" d="M1240 500 C 1480 300, 1780 200, 2120 40"/>
+    <path transform="translate(60 0)" d="M1240 500 C 1480 300, 1780 200, 2120 40"/>
+    <path transform="translate(65 0)" d="M1240 500 C 1480 300, 1780 200, 2120 40"/>
+    <path transform="translate(0 0)" d="M-120 270 C 160 210, 300 500, 640 480"/>
+    <path transform="translate(0 5)" d="M-120 270 C 160 210, 300 500, 640 480"/>
+    <path transform="translate(0 10)" d="M-120 270 C 160 210, 300 500, 640 480"/>
+    <path transform="translate(0 15)" d="M-120 270 C 160 210, 300 500, 640 480"/>
+    <path transform="translate(0 20)" d="M-120 270 C 160 210, 300 500, 640 480"/>
+    <path transform="translate(0 25)" d="M-120 270 C 160 210, 300 500, 640 480"/>
+    <path transform="translate(0 30)" d="M-120 270 C 160 210, 300 500, 640 480"/>
+    <path transform="translate(0 35)" d="M-120 270 C 160 210, 300 500, 640 480"/>
+    <path transform="translate(0 40)" d="M-120 270 C 160 210, 300 500, 640 480"/>
+    <path transform="translate(0 45)" d="M-120 270 C 160 210, 300 500, 640 480"/>
+    <path transform="translate(0 50)" d="M-120 270 C 160 210, 300 500, 640 480"/>
+    <path transform="translate(0 55)" d="M-120 270 C 160 210, 300 500, 640 480"/>
+    <path transform="translate(0 0)" d="M1500 -40 C 1650 60, 1800 130, 2120 120"/>
+    <path transform="translate(0 5)" d="M1500 -40 C 1650 60, 1800 130, 2120 120"/>
+    <path transform="translate(0 10)" d="M1500 -40 C 1650 60, 1800 130, 2120 120"/>
+    <path transform="translate(0 15)" d="M1500 -40 C 1650 60, 1800 130, 2120 120"/>
+    <path transform="translate(0 20)" d="M1500 -40 C 1650 60, 1800 130, 2120 120"/>
+    <path transform="translate(0 25)" d="M1500 -40 C 1650 60, 1800 130, 2120 120"/>
+    <path transform="translate(0 30)" d="M1500 -40 C 1650 60, 1800 130, 2120 120"/>
+    <path transform="translate(0 35)" d="M1500 -40 C 1650 60, 1800 130, 2120 120"/>
+    <path transform="translate(0 40)" d="M1500 -40 C 1650 60, 1800 130, 2120 120"/>
+    <path transform="translate(0 45)" d="M1500 -40 C 1650 60, 1800 130, 2120 120"/>
+    <path transform="translate(0 50)" d="M1500 -40 C 1650 60, 1800 130, 2120 120"/>
+    <path transform="translate(0 55)" d="M1500 -40 C 1650 60, 1800 130, 2120 120"/>
+    <path transform="translate(0 0)" d="M-120 20 C 200 80, 380 -20, 700 60 S 1100 200, 1300 -40"/>
+    <path transform="translate(0 5)" d="M-120 20 C 200 80, 380 -20, 700 60 S 1100 200, 1300 -40"/>
+    <path transform="translate(0 10)" d="M-120 20 C 200 80, 380 -20, 700 60 S 1100 200, 1300 -40"/>
+    <path transform="translate(0 15)" d="M-120 20 C 200 80, 380 -20, 700 60 S 1100 200, 1300 -40"/>
+    <path transform="translate(0 20)" d="M-120 20 C 200 80, 380 -20, 700 60 S 1100 200, 1300 -40"/>
+    <path transform="translate(0 25)" d="M-120 20 C 200 80, 380 -20, 700 60 S 1100 200, 1300 -40"/>
+    <path transform="translate(0 30)" d="M-120 20 C 200 80, 380 -20, 700 60 S 1100 200, 1300 -40"/>
+    <path transform="translate(0 35)" d="M-120 20 C 200 80, 380 -20, 700 60 S 1100 200, 1300 -40"/>
+    <path transform="translate(0 40)" d="M-120 20 C 200 80, 380 -20, 700 60 S 1100 200, 1300 -40"/>
+    <path transform="translate(0 45)" d="M-120 20 C 200 80, 380 -20, 700 60 S 1100 200, 1300 -40"/>
+    <path transform="translate(0 50)" d="M-120 20 C 200 80, 380 -20, 700 60 S 1100 200, 1300 -40"/>
+    <path transform="translate(0 55)" d="M-120 20 C 200 80, 380 -20, 700 60 S 1100 200, 1300 -40"/>
+    <path transform="translate(0 0)" d="M300 500 C 500 380, 760 420, 1000 250 S 1300 120, 1600 200"/>
+    <path transform="translate(0 5)" d="M300 500 C 500 380, 760 420, 1000 250 S 1300 120, 1600 200"/>
+    <path transform="translate(0 10)" d="M300 500 C 500 380, 760 420, 1000 250 S 1300 120, 1600 200"/>
+    <path transform="translate(0 15)" d="M300 500 C 500 380, 760 420, 1000 250 S 1300 120, 1600 200"/>
+    <path transform="translate(0 20)" d="M300 500 C 500 380, 760 420, 1000 250 S 1300 120, 1600 200"/>
+    <path transform="translate(0 25)" d="M300 500 C 500 380, 760 420, 1000 250 S 1300 120, 1600 200"/>
+    <path transform="translate(0 30)" d="M300 500 C 500 380, 760 420, 1000 250 S 1300 120, 1600 200"/>
+    <path transform="translate(0 35)" d="M300 500 C 500 380, 760 420, 1000 250 S 1300 120, 1600 200"/>
+    <path transform="translate(0 40)" d="M300 500 C 500 380, 760 420, 1000 250 S 1300 120, 1600 200"/>
+    <path transform="translate(0 45)" d="M300 500 C 500 380, 760 420, 1000 250 S 1300 120, 1600 200"/>
+    <path transform="translate(0 50)" d="M300 500 C 500 380, 760 420, 1000 250 S 1300 120, 1600 200"/>
+    <path transform="translate(0 55)" d="M300 500 C 500 380, 760 420, 1000 250 S 1300 120, 1600 200"/>
+    <path transform="translate(0 60)" d="M300 500 C 500 380, 760 420, 1000 250 S 1300 120, 1600 200"/>
+    <path transform="translate(0 0)" d="M180 -60 C 260 120, 420 260, 380 500"/>
+    <path transform="translate(5 0)" d="M180 -60 C 260 120, 420 260, 380 500"/>
+    <path transform="translate(10 0)" d="M180 -60 C 260 120, 420 260, 380 500"/>
+    <path transform="translate(15 0)" d="M180 -60 C 260 120, 420 260, 380 500"/>
+    <path transform="translate(20 0)" d="M180 -60 C 260 120, 420 260, 380 500"/>
+    <path transform="translate(25 0)" d="M180 -60 C 260 120, 420 260, 380 500"/>
+    <path transform="translate(30 0)" d="M180 -60 C 260 120, 420 260, 380 500"/>
+    <path transform="translate(35 0)" d="M180 -60 C 260 120, 420 260, 380 500"/>
+    <path transform="translate(40 0)" d="M180 -60 C 260 120, 420 260, 380 500"/>
+    <path transform="translate(45 0)" d="M180 -60 C 260 120, 420 260, 380 500"/>
+    <path transform="translate(50 0)" d="M180 -60 C 260 120, 420 260, 380 500"/>
+    <path transform="translate(0 0)" d="M1720 500 C 1800 360, 1900 300, 2120 300"/>
+    <path transform="translate(0 5)" d="M1720 500 C 1800 360, 1900 300, 2120 300"/>
+    <path transform="translate(0 10)" d="M1720 500 C 1800 360, 1900 300, 2120 300"/>
+    <path transform="translate(0 15)" d="M1720 500 C 1800 360, 1900 300, 2120 300"/>
+    <path transform="translate(0 20)" d="M1720 500 C 1800 360, 1900 300, 2120 300"/>
+    <path transform="translate(0 25)" d="M1720 500 C 1800 360, 1900 300, 2120 300"/>
+    <path transform="translate(0 30)" d="M1720 500 C 1800 360, 1900 300, 2120 300"/>
+    <path transform="translate(0 35)" d="M1720 500 C 1800 360, 1900 300, 2120 300"/>
+    <path transform="translate(0 40)" d="M1720 500 C 1800 360, 1900 300, 2120 300"/>
+    <path transform="translate(0 45)" d="M1720 500 C 1800 360, 1900 300, 2120 300"/>
+    <path transform="translate(0 50)" d="M1720 500 C 1800 360, 1900 300, 2120 300"/>
+    <path transform="translate(0 55)" d="M1720 500 C 1800 360, 1900 300, 2120 300"/>
+  </g>
+</svg>
