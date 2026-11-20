@@ -343,6 +343,13 @@
   .au-script i svg{width:18px;height:18px}
   .au-script small{display:block;margin-top:2px;font-size:12px;font-weight:400;color:var(--muted)}
   @media (max-width:760px){.au-list,.au-scripts{grid-template-columns:1fr}.au-card{padding:18px}}
+  .dt-vr{max-width:1040px;margin:32px auto 0}
+  .vr-stage{position:relative;aspect-ratio:16/9;max-height:min(78vh,620px);width:100%;overflow:hidden;border-radius:14px;background:#111}
+  .vr-stage iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+  .vr-bar{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-top:12px;font-size:14px;color:var(--muted)}
+  .vr-bar p{margin:0}
+  .vr-bar b{color:var(--ink);margin-right:10px}
+  .vr-bar a{font-weight:600;color:var(--green-dark)}
   .dt-video video{display:block;width:auto;max-width:100%;height:min(78vh,760px);background:#111}
   .dt-gallery{margin-top:32px;outline:none}
   .g-stage{position:relative;aspect-ratio:3/2;max-height:min(78vh,760px);width:100%;overflow:hidden;background:#111;touch-action:pan-y;user-select:none}
@@ -957,6 +964,21 @@
     });
     EXH.splice(at, EXH.length - at, ...past);
   }
+  /* VR 전시 상세: 이미지 대신 VR 전시장(Matterport) 화면.
+     누리집 온라인 미술관 > VR 전시(https://www.busan.go.kr/moca/exhibition0402)에 실제 VR이 있는 전시는 경이로운 전환뿐.
+     나머지는 누리집의 비슷한 VR 전시로 임시(테스트) 연결함 — 실제 VR 주소를 받으면 아래 값만 바꾸면 됨 */
+  const VR_TOUR = {
+    'wonder-turn': 'dckiqc5aUzi',   // 경이로운 전환 (실제)
+    'moca-1741765': 'pgDouDCN7xX',  // 다원예술_몸, 실험 중 ← 테스트: 감각의 문법
+    'moca-1741763': '7H4CH3LmFCD',  // 수집: 결정의 방 ← 테스트: MoCA Collection#1
+    'moca-1722885': 'bWj42rwWyTX',  // 플랫폼_나의 집이 나 ← 테스트: 혁명은 도시적으로
+    'moca-1719199': 'yDf6TxQxHQp',  // 시네미디어_영화 이후 ← 테스트: 신실한 실패: 재현 불가능한 재현
+    'gray-box': 'UzV9rdCNuaB'       // 그레이박스 이후 ← 테스트: 그 후, 그 뒤,
+  };
+  EXH.forEach(e => {
+    if (e.group !== 'past' || !e.type.includes('vr')) return;
+    e.vr = VR_TOUR[e.id] ? { id: VR_TOUR[e.id] } : { id: VR_TOUR['wonder-turn'], sample: '경이로운 전환' };
+  });
 
   /* hero slides per tab */
   const INTRO = {
@@ -1228,6 +1250,10 @@
         <div class="g-thumbs">
           ${e.gallery.map((src, i) => `<button type="button" data-g="${i}" aria-label="${i + 1}번 이미지 보기"${i === 0 ? ' aria-current="true"' : ''}><img src="${src}" alt="" loading="lazy"></button>`).join('')}
         </div>
+      </div>` : e.vr ? `<div class="dt-vr reveal">
+        <div class="vr-stage"><iframe src="https://my.matterport.com/show/?m=${e.vr.id}&play=1&qs=1&ts=2&lp=1&brand=0" title="${esc(e.title)} VR 전시장 둘러보기" allow="fullscreen; xr-spatial-tracking; autoplay" allowfullscreen loading="lazy"></iframe></div>
+        <div class="vr-bar"><p><b>VR 전시장 둘러보기</b>${e.vr.sample ? `<span>예시 화면: 《${esc(e.vr.sample)}》 VR 전시장</span>` : '<span>화면을 끌어 둘러보고, 바닥의 원을 눌러 이동하세요.</span>'}</p>
+        <a href="https://my.matterport.com/show/?m=${e.vr.id}&play=1" target="_blank" rel="noopener">새 창에서 크게 보기 ↗</a></div>
       </div>` : e.video ? `<div class="dt-visual dt-video reveal"><video controls preload="metadata" playsinline aria-label="${esc(e.title)} 영상"><source src="${e.video}#t=${e.videoStart || 0.5}" type="video/mp4">영상을 재생할 수 없는 브라우저입니다.</video></div>` : `<div class="dt-visual reveal"><img src="${e.detailImg || e.img}" alt="${esc(e.title)} 작품 이미지"></div>`}
       ${e.audio ? `
       <section class="dt-audio reveal" aria-label="${esc(e.audio.title)}">
