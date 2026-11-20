@@ -146,6 +146,11 @@
   .exh-main .cap small{font-size:11px;opacity:.7;letter-spacing:1px}
   .exh-main .cap h3{font-family:'Montserrat',sans-serif;font-size:16px;font-weight:600;margin:4px 0}
   .exh-main .cap p{font-size:12px;opacity:.75}
+  .exh-main.is-poster{background:#fff;border:1px solid #e3e6e2}
+  .exh-main.is-poster::after{display:none}
+  .exh-main.is-poster img{object-fit:contain;width:100%;height:100%}
+  .exh-info h3 a{color:inherit;transition:color .2s}
+  .exh-info h3 a:hover{color:var(--green)}
   .exh-info h3{font-size:30px;font-weight:700;color:var(--ink);display:flex;align-items:baseline;gap:16px;flex-wrap:wrap}
   .exh-info h3 small{font-family:'Montserrat',sans-serif;font-size:13px;font-weight:500;color:var(--muted)}
   .exh-meta{margin:22px 0;border-top:1px solid var(--ink);border-bottom:1px solid var(--line);padding:16px 0}
@@ -529,9 +534,9 @@
 
   <div class="hero-slide on"><img src="images/hero-01.webp" alt="부산현대미술관 수직정원 정면 외관"></div>
   <div class="hero-slide"><img src="images/hero-02.webp" alt="낙동강과 어우러진 부산현대미술관 전경"></div>
-  <div class="hero-slide"><img src="https://images.unsplash.com/photo-1642846442523-d852165d44a0?w=1920&h=1080&fit=crop&auto=format&q=80" alt="부산현대미술관 수직정원 외관"></div>
-  <div class="hero-slide"><img src="https://images.unsplash.com/photo-1531208853003-c1ec1b8a81d7?w=1920&h=1080&fit=crop&auto=format&q=80" alt="을숙도 풍경"></div>
-  <div class="hero-slide"><img src="https://images.unsplash.com/photo-1451438143976-4e1aa4f7f153?w=1920&h=1080&fit=crop&auto=format&q=80" alt="전시장 전경"></div>
+  <div class="hero-slide"><img src="images/together-main.jpg" alt="수직정원 옆 대형 전시 배너가 걸린 부산현대미술관 외관"></div>
+  <div class="hero-slide"><img src="images/hero-04.webp" alt="푸른 하늘 아래 수직정원으로 덮인 부산현대미술관 건물"></div>
+  <div class="hero-slide"><img src="images/hero-05.webp" alt="원형 서가와 계단식 좌석이 있는 어린이 도서관 책그림섬"></div>
 
   <div class="hero-copy">
     <p class="kicker">부산현대미술관 · 을숙도</p>
@@ -570,7 +575,7 @@
 <section class="sec" id="exhibition">
   <div class="wrap">
     <div class="sec-head rv">
-      <a href="#" class="more-btn">전시 더보기</a>
+      <a href="exhibition.html#detail/re-saesae-chair" class="more-btn">전시 더보기</a>
       <h2 class="sec-title">Exhibition</h2>
       <p class="sec-sub">부산현대미술관 전시를 소개합니다</p>
     </div>
@@ -581,34 +586,29 @@
         <button class="arrow" aria-label="다음"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M9 4l8 8-8 8"/></svg></button>
       </div>
 
-      <div class="exh-main ph">
-        <img src="images/exhibition-main.jpg" alt="몰입형 미디어 전시 전경">
-        <div class="cap">
-          <small>2024 MoCA BUSAN</small>
-          <h3>The First Impressionist Effect in 3D Design</h3>
-          <p>빛과 색으로 확장되는 감각의 공간, 몰입형 미디어 전시</p>
-        </div>
+      <div class="exh-main ph is-poster">
+        <img src="images/re-saesae-chair-poster.jpg" alt="Re: 새-새-의자 전시 포스터 – 재활용 플라스틱 모듈로 만든 의자 그림과 RE BIRD NEW CHAIR 글자">
       </div>
 
       <div class="exh-info">
-        <h3>물결의 회연 <small class="en">tides, wind, and pixels</small></h3>
+        <h3><a href="exhibition.html#detail/re-saesae-chair">Re: 새-새-의자</a> <small class="en">Re: Bird New Chair</small></h3>
         <ul class="exh-meta">
-          <li><b>기간</b><span>2024.09.06 – 2025.01.26</span></li>
-          <li><b>장소</b><span>부산현대미술관 1층 전시실 1, 2</span></li>
-          <li><b>관람료</b><span>무료</span></li>
-          <li><b>참여작가</b><span>국내외 작가 12인</span></li>
+          <li><b>기간</b><span>2024.03.15 – 상설</span></li>
+          <li><b>장소</b><span>지상 1층, 야외정원 등</span></li>
+          <li><b>참여작가</b><span>이웅렬, 곽이브</span></li>
+          <li><b>출품작</b><span>재활용 플라스틱 이용 디자인 가구 등</span></li>
         </ul>
-        <p class="exh-desc">강과 바다가 만나는 을숙도의 지형적 특성에서 출발한 이번 전시는 물결, 바람, 그리고 디지털 픽셀이라는 세 가지 흐름을 통해 자연과 기술이 서로를 비추는 방식을 탐구합니다. 관람객은 끊임없이 변화하는 풍경 속에서 자신만의 감각적 경험을 발견하게 됩니다.</p>
+        <p class="exh-desc">《Re: 새-새-의자》는 2022년부터 2023년까지 자연과의 상생과 지속가능성을 모색한 야외 전시 《Re: 새-새-정글》의 의의를 이어 가기 위해, 새가 다시 의자로 태어나는 프로젝트입니다. 조형물의 플라스틱 모듈로 실용 가구를 제작해 폐자재로 인한 사회·환경 문제에 대한 관심을 높이고자 합니다.</p>
         <div class="exh-thumbs">
-          <a href="#" class="thumb">
-            <div class="img ph"><img src="images/exhibition-thumb-01.webp" alt="붉은 하늘 아래 나무가 있는 정원 회화"></div>
-            <small>EXHIBITION 2024</small>
-            <h4>NewColor Shadow Island Perception Intensity</h4>
+          <a href="exhibition.html#detail/re-saesae-chair" class="thumb">
+            <div class="img ph"><img src="images/re-saesae-jungle.webp" alt="야외정원에 놓인 흰색 플라스틱 모듈 새 조형물 Re: 새-새-정글"></div>
+            <small>RE: BIRD NEW CHAIR</small>
+            <h4>야외정원의 새 조형물, 《Re: 새-새-정글》</h4>
           </a>
-          <a href="#" class="thumb">
-            <div class="img ph"><img src="images/exhibition-thumb-02.jpg" alt="데이터로 이루어진 디지털 파도"></div>
-            <small>EXHIBITION 2024</small>
-            <h4>Why Minor Anomalies Matter: Move Than the Tide</h4>
+          <a href="exhibition.html#detail/re-saesae-chair" class="thumb">
+            <div class="img ph"><img src="images/re-saesae-chair-lobby.jpg" alt="로비에 놓인 재활용 플라스틱 모듈 의자와 테이블"></div>
+            <small>RE: BIRD NEW CHAIR</small>
+            <h4>조형물 모듈로 다시 태어난 로비 의자</h4>
           </a>
         </div>
       </div>
