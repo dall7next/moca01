@@ -57,6 +57,10 @@
   .hero-slide.on{opacity:1}
   .hero-slide img{transform:scale(1.06);transition:transform 7s ease}
   .hero-slide.on img{transform:scale(1)}
+  /* 1번 슬라이드: 유튜브 영상 배경(소리 없이 자동 재생·반복). 영상이 뜨기 전에는 아래 사진이 보임 */
+  .hero-video{position:absolute;inset:0;overflow:hidden;pointer-events:none;opacity:0;transition:opacity 1.2s ease}
+  .hero-video.ready{opacity:1}
+  .hero-video iframe{position:absolute;left:50%;top:50%;width:max(100%,177.78vh);height:max(100%,56.25vw);min-height:100%;transform:translate(-50%,-50%) scale(1.12);border:0}
   .hero::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.45) 0%,rgba(0,0,0,.05) 35%,rgba(0,0,0,.05) 60%,rgba(0,0,0,.55) 100%);pointer-events:none}
   header{position:absolute;top:0;left:0;right:0;z-index:20;background:transparent;transition:background .3s}
   header.fixed{position:fixed;background:rgba(17,17,17,.6);backdrop-filter:blur(8px)}
@@ -113,9 +117,9 @@
   .hero-prog{display:flex;gap:4px;margin-top:22px}
   .hero-prog i{position:relative;width:116px;height:2px;background:rgba(255,255,255,.35);overflow:hidden}
   .hero-prog i::after{content:"";position:absolute;left:0;top:0;bottom:0;width:0;background:var(--hover)}
-  .hero-prog i.on::after{animation:prog 6s linear forwards}
+  .hero-prog i.on::after{animation:prog var(--dur,6s) linear forwards}
   .hero-prog.paused i.on::after{animation-play-state:paused}
-  @keyframes prog{to{width:100%}}
+  @keyframes prog{from{width:calc(var(--from,0) * 100%)}to{width:100%}}
 
   .hero-grid{position:absolute;z-index:3;top:120px;bottom:0;left:var(--head-side);right:var(--head-side);pointer-events:none}
   .hero-grid .v{position:absolute;top:0;bottom:0;width:1px;background:rgba(255,255,255,.16)}
@@ -532,7 +536,7 @@
     </div>
   </header>
 
-  <div class="hero-slide on"><img src="images/hero-01.webp" alt="부산현대미술관 수직정원 정면 외관"></div>
+  <div class="hero-slide on is-video"><img src="images/hero-01.webp" alt="부산현대미술관 수직정원 정면 외관"><div class="hero-video" aria-hidden="true"><iframe id="heroVideo" src="https://www.youtube-nocookie.com/embed/H10-waGYdH8?enablejsapi=1&amp;autoplay=1&amp;mute=1&amp;controls=0&amp;playsinline=1&amp;rel=0&amp;modestbranding=1&amp;disablekb=1&amp;iv_load_policy=3" title="부산현대미술관 소개 영상" tabindex="-1" allow="autoplay; encrypted-media; picture-in-picture" referrerpolicy="strict-origin-when-cross-origin"></iframe></div></div>
   <div class="hero-slide"><img src="images/hero-02.webp" alt="낙동강과 어우러진 부산현대미술관 전경"></div>
   <div class="hero-slide"><img src="images/together-main.jpg" alt="수직정원 옆 대형 전시 배너가 걸린 부산현대미술관 외관"></div>
   <div class="hero-slide"><img src="images/hero-04.webp" alt="푸른 하늘 아래 수직정원으로 덮인 부산현대미술관 건물"></div>
@@ -943,28 +947,77 @@
   const heroProg = document.getElementById('heroProg');
   const pauseBtn = document.getElementById('hPause');
   document.getElementById('total').textContent = String(slides.length).padStart(2, '0');
+  // 사진 슬라이드는 6초. 영상 슬라이드는 영상이 끝까지 재생된 뒤 다음으로 넘어감
+  const PHOTO_MS = 6000;
+  const isVideo = i => slides[i].classList.contains('is-video');
   heroProg.innerHTML = slides.map(() => '<i></i>').join('');
   const segs = [...heroProg.children];
   const pauseIcon = pauseBtn.innerHTML;
   const playIcon = '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5.5v13l11-6.5z"/></svg>';
   let idx = 0, timer, paused = false;
 
+  // 진행 막대: 남은 시간만큼 다시 채우기
+  function fill(seconds, from = 0) {
+    const s = segs[idx];
+    s.classList.remove('on');
+    s.style.setProperty('--dur', seconds + 's');
+    s.style.setProperty('--from', from);
+    void s.offsetWidth;
+    s.classList.add('on');
+  }
+
   // slide timer counts from when the current segment's fill started, so pausing resumes where it left off
-  let started = 0, remaining = 6000;
+  let started = 0, remaining = PHOTO_MS;
   function schedule(ms) {
     clearTimeout(timer);
     started = Date.now(); remaining = ms;
     timer = setTimeout(() => go(idx + 1), ms);
   }
+
+  /* ----- 유튜브 영상 (IFrame Player API) ----- */
+  const vFrame = document.getElementById('heroVideo');
+  let player = null, vReady = false;
+  const vTime = () => { try { return { t: player.getCurrentTime() || 0, d: player.getDuration() || 0 }; } catch (e) { return { t: 0, d: 0 }; } };
+  function syncVideoBar() {
+    const { t, d } = vTime();
+    if (d > 0) fill(Math.max(d - t, .5), t / d);
+  }
+  function startVideo() {
+    clearTimeout(timer);
+    if (!vReady) { schedule(30000); fill(30); return; } // 영상을 못 불러오면 30초 뒤 넘어감
+    player.seekTo(0, true);
+    if (!paused) player.playVideo();
+    setTimeout(syncVideoBar, 400);
+  }
+  function stopVideo() { if (vReady) player.pauseVideo(); }
+  window.onYouTubeIframeAPIReady = () => {
+    player = new YT.Player(vFrame, {
+      events: {
+        onReady: () => { vReady = true; player.mute(); if (isVideo(idx)) startVideo(); },
+        onStateChange: ev => {
+          if (!isVideo(idx)) return;
+          if (ev.data === YT.PlayerState.PLAYING) { vFrame.parentElement.classList.add('ready'); syncVideoBar(); }
+          if (ev.data === YT.PlayerState.ENDED && !paused) go(idx + 1);
+        }
+      }
+    });
+  };
+  if (vFrame) {
+    const api = document.createElement('script');
+    api.src = 'https://www.youtube.com/iframe_api';
+    document.head.appendChild(api);
+  }
+
   function go(n) {
     slides[idx].classList.remove('on');
     segs[idx].classList.remove('on');
+    if (isVideo(idx)) stopVideo();
     idx = (n + slides.length) % slides.length;
     slides[idx].classList.add('on');
-    void segs[idx].offsetWidth;
-    segs[idx].classList.add('on');
     cur.textContent = String(idx + 1).padStart(2, '0');
-    if (paused) remaining = 6000; else schedule(6000);
+    if (isVideo(idx)) { fill(1000); startVideo(); return; }
+    fill(PHOTO_MS / 1000);
+    if (paused) remaining = PHOTO_MS; else schedule(PHOTO_MS);
   }
   document.getElementById('hPrev').onclick = () => go(idx - 1);
   document.getElementById('hNext').onclick = () => go(idx + 1);
@@ -973,11 +1026,14 @@
     heroProg.classList.toggle('paused', paused);
     pauseBtn.innerHTML = paused ? playIcon : pauseIcon;
     pauseBtn.setAttribute('aria-label', paused ? '재생' : '일시정지');
+    if (isVideo(idx) && vReady) {
+      if (paused) player.pauseVideo(); else { player.playVideo(); syncVideoBar(); }
+      return;
+    }
     if (paused) { clearTimeout(timer); remaining -= Date.now() - started; }
     else schedule(remaining);
   };
-  segs[0].classList.add('on');
-  schedule(6000);
+  if (isVideo(0)) { fill(1000); startVideo(); } else { fill(PHOTO_MS / 1000); schedule(PHOTO_MS); }
 
   // hero grid: thin column/row lines with plus marks at the crossings.
   // Columns repeat at the same width past the content edges so wide screens see a continuous pattern.
