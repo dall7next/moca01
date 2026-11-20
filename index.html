@@ -200,6 +200,11 @@
   .book-band::after{content:"";position:absolute;inset:0;background:linear-gradient(0deg,rgba(0,0,0,.72) 0%,rgba(0,0,0,.4) 45%,rgba(0,0,0,.08) 100%);pointer-events:none}
   .book-card{position:relative;margin-top:-220px;display:grid;grid-template-columns:1fr 1fr;background:#fff;box-shadow:0 30px 60px rgba(0,0,0,.08)}
   .book-card .img{min-height:380px}
+  /* 책그림섬 사진: 서서히 나타나고 사라지며 반복 */
+  .book-fade{position:relative;overflow:hidden}
+  .book-fade img{position:absolute;inset:0;opacity:0;transition:opacity 1.6s ease}
+  .book-fade img.on{opacity:1}
+  @media (prefers-reduced-motion:reduce){.book-fade img{transition:none}}
   .book-card .txt{padding:56px 52px;display:flex;flex-direction:column}
   .book-card .txt h3{font-size:34px;font-weight:900;color:var(--ink);display:flex;gap:22px;align-items:flex-start;flex-wrap:wrap}
   .book-card .txt h3 small{font-size:15px;font-weight:500;color:#555;line-height:1.6;padding-top:6px}
@@ -220,14 +225,19 @@
   .ev .img{position:relative;overflow:hidden}
   .ev .img img{transition:transform .6s}
   .ev:hover .img img{transform:scale(1.06)}
+  .ev .img.is-poster img{position:absolute;inset:0;object-position:center 22%}
   .ev .img .play{position:absolute;left:18px;bottom:18px;width:34px;height:22px;background:#fff;border-radius:4px;display:grid;place-items:center}
   .ev .img .play::before{content:"";border-left:8px solid #e33;border-top:5px solid transparent;border-bottom:5px solid transparent}
 
   /* ---------- full bleed gallery ---------- */
   .bleed{height:clamp(220px,29.4vw,500px);overflow:hidden;position:relative}
-  .bleed img{transform:scale(1.1);will-change:transform;object-position:50% 72%}
+  .bleed img{transform:scale(1.1);will-change:transform;object-position:50% 42%}
   .bleed::after{content:"";position:absolute;inset:0;z-index:1;background:linear-gradient(0deg,rgba(0,0,0,.62) 0%,rgba(0,0,0,.32) 40%,rgba(0,0,0,.08) 75%,rgba(0,0,0,0) 100%);pointer-events:none}
-  .bleed .bleed-logo{position:absolute;z-index:2;left:52%;top:79%;transform:translate(-50%,-50%);width:clamp(74px,10vw,174px);height:auto;filter:drop-shadow(0 2px 10px rgba(0,0,0,.18))}
+  .bleed .bleed-cap{position:absolute;z-index:2;left:0;right:0;bottom:clamp(22px,4vw,56px);max-width:1240px;margin:0 auto;padding:0 max(24px,env(safe-area-inset-left,0px));color:#fff;text-shadow:0 1px 8px rgba(0,0,0,.35)}
+  .bleed-cap .bc-artist{font-size:clamp(13px,1.1vw,15px);font-weight:600;letter-spacing:.2px;opacity:.95}
+  .bleed-cap .bc-artist span{font-family:'Montserrat',sans-serif;font-weight:500;opacity:.75;margin-left:6px}
+  .bleed-cap h3{margin-top:8px;font-family:'Montserrat',sans-serif;font-size:clamp(18px,2.2vw,30px);font-weight:700;letter-spacing:-.3px;line-height:1.3}
+  .bleed-cap .bc-desc{margin-top:8px;font-size:clamp(12px,1vw,14px);opacity:.85}
 
   /* ---------- together ---------- */
   .tg-main{position:relative}
@@ -721,7 +731,12 @@
   <div class="book-foot">
   <div class="wrap">
     <div class="book-card rv">
-      <div class="img ph"><img src="images/library-02.jpg" alt="책그림섬 원형 그림책 열람 공간"></div>
+      <div class="img ph book-fade" aria-roledescription="carousel" aria-label="책그림섬 사진">
+        <img class="on" src="images/library-02.jpg" alt="책그림섬 노란 원형 그림책 열람 공간">
+        <img src="images/hero-05.webp" alt="원형 서가와 계단식 좌석이 있는 책그림섬 전경" loading="lazy">
+        <img src="images/book-shelf-01.webp" alt="노란 바닥 위 나무 서가에 놓인 그림책들" loading="lazy">
+        <img src="images/book-shelf-02.webp" alt="계단 서가에 꽂힌 예술 도서와 그림책" loading="lazy">
+      </div>
       <div class="txt">
         <h3>책그림섬 <small>마음을 다지고, 동행을 키우고,<br>당신의 하루가 머무는 곳.</small></h3>
         <p>책그림섬은 부산현대미술관 1층에 위치한 그림책 전문 도서 공간입니다. 국내외 그림책과 예술 도서를 자유롭게 열람할 수 있으며, 아이와 어른이 함께 머물며 이야기를 나누는 쉼터가 되어 줍니다. 계절마다 바뀌는 큐레이션 서가와 작가 연계 프로그램도 만나보세요.</p>
@@ -742,12 +757,12 @@
     <div class="ev-list">
       <article class="ev rv">
         <div class="txt">
-          <div class="tags"><span>2024.11.07</span><span>PM 02:00 – 05:00</span></div>
-          <h3>WHISPERS OF ROSES : ETERNAL BLOOM<br>(장미의 속삭임 : 영원한 피어남)</h3>
-          <p>장미를 매개로 생명과 시간, 기억의 순환을 이야기하는 퍼포먼스와 아티스트 토크가 함께하는 특별 행사입니다. 사전 예약을 통해 누구나 참여할 수 있습니다.</p>
-          <a href="#" class="btn-sm">자세히보기</a>
+          <div class="tags"><span>2026.12.11 – 2027.03.28</span><span>전시실 2·3 (지하 1층), 전시실 4 (1층)</span></div>
+          <h3>THE LABOR OF READING THE WORLD<br>(세상은 어떻게 읽히는가)</h3>
+          <p>미술작품을 단순히 보는 데서 벗어나, 작품과 세상을 읽고 해석하는 행위 자체를 예술적 경험으로 확장하는 국제 기획전입니다. 국내외 작가 20명(팀)의 회화, 영상, 설치, 아카이브, 소설, 시를 만나 보세요.</p>
+          <a href="exhibition.html#detail/moca-1714075" class="btn-sm">자세히보기</a>
         </div>
-        <div class="img ph"><img src="https://images.unsplash.com/photo-1583502070936-d24abe7f1975?w=680&h=500&fit=crop&auto=format&q=80" alt="장미 정물 유화"><span class="play"></span></div>
+        <div class="img ph is-poster"><img src="images/event-reading-world.jpg" alt="《세상은 어떻게 읽히는가》 전시 포스터 – 겹쳐진 글자와 작가 명단"></div>
       </article>
       <article class="ev rv">
         <div class="txt">
@@ -756,14 +771,14 @@
           <p>사계절 푸른 소나무의 기상을 주제로 한 드로잉 워크숍과 작가와의 대화. 자연 속에서 회복과 인내의 의미를 되새기는 시간을 마련했습니다.</p>
           <a href="#" class="btn-sm">자세히보기</a>
         </div>
-        <div class="img ph"><img src="https://images.unsplash.com/photo-1752316226195-5cbebb4b74d9?w=680&h=500&fit=crop&crop=top&auto=format&q=80" alt="하늘로 뻗은 소나무 그림"><span class="play"></span></div>
+        <div class="img ph"><img src="images/event-02.jpg" alt="비 오는 바다의 큰 파도 위에서 우산을 쓴 초록 공룡을 그린 그림"><span class="play"></span></div>
       </article>
     </div>
   </div>
 </section>
 
 <!-- ===================== BLEED ===================== -->
-<section class="bleed ph"><img id="parallax" src="images/gallery-wide.jpg" alt="회화 작품이 걸린 전시장 전경"><img class="bleed-logo" src="images/logo-mark.svg" alt="MoCA Busan"></section>
+<section class="bleed ph"><img id="parallax" src="images/bleed-raqs.jpg" alt="검은 칠판 같은 화면 위에 손글씨 문장을 쓴 액자 작품들이 흰 벽에 걸린 전시 전경"><div class="bleed-cap"><p class="bc-artist">락스 미디어 콜렉티브 <span>Raqs Media Collective</span></p><h3>《Corrections to the First Draft of History》, 2014</h3><p class="bc-desc">기록과 언어를 통해 역사와 해석의 문제를 탐구하는 작품</p></div></section>
 
 <!-- ===================== TOGETHER ===================== -->
 <section class="sec" id="together">
@@ -1110,6 +1125,19 @@
       if (Math.abs(dx) > 50) show(at + (dx < 0 ? 1 : -1));
     });
     show(0);
+  })();
+
+  // 책그림섬 사진 페이드 (5초마다)
+  (() => {
+    const imgs = [...document.querySelectorAll('.book-fade img')];
+    if (imgs.length < 2) return;
+    let k = 0;
+    setInterval(() => {
+      if (document.hidden) return;
+      imgs[k].classList.remove('on');
+      k = (k + 1) % imgs.length;
+      imgs[k].classList.add('on');
+    }, 5000);
   })();
 
   // collection carousel
