@@ -142,7 +142,13 @@
   .quick a:hover .go{transform:translateX(4px)}
 
   /* ---------- exhibition ---------- */
-  .exh-body{display:grid;grid-template-columns:1.05fr 1fr;gap:48px;align-items:stretch;position:relative}
+  .exh-body{position:relative}
+  /* 전시 슬라이드: 한 번에 하나씩, 페이드로 전환 */
+  .exh-slide{display:grid;grid-template-columns:1.05fr 1fr;gap:48px;align-items:stretch}
+  .exh-slide:not(.on){display:none}
+  .exh-slide.on{animation:exhFade .6s ease}
+  @keyframes exhFade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+  @media (prefers-reduced-motion:reduce){.exh-slide.on{animation:none}}
   .exh-main{position:relative;overflow:hidden}
   .exh-main img{position:absolute;inset:0}
   .exh-main::after{content:"";position:absolute;inset:0;background:linear-gradient(0deg,rgba(0,0,0,.75),transparent 55%)}
@@ -153,6 +159,7 @@
   .exh-main.is-poster{background:#fff;border:1px solid #e3e6e2}
   .exh-main.is-poster::after{display:none}
   .exh-main.is-poster img{object-fit:contain;width:100%;height:100%}
+  .exh-main.is-poster.is-cover img{object-fit:cover;object-position:center 40%}
   .exh-info h3 a{color:inherit;transition:color .2s}
   .exh-info h3 a:hover{color:var(--green)}
   .exh-info h3{font-size:30px;font-weight:700;color:var(--ink);display:flex;align-items:baseline;gap:16px;flex-wrap:wrap}
@@ -298,7 +305,7 @@
     .quick ul{padding:0}
     .quick a{padding:0 22px;gap:20px}
     .hero-prog i{width:70px}
-    .exh-body{grid-template-columns:1fr}
+    .exh-slide{grid-template-columns:1fr}
     .exh-main{aspect-ratio:4/3.1}
     .side-arrows{display:none}
     .col-card{flex-basis:calc((100% - 28px)/2)}
@@ -541,6 +548,7 @@
   <div class="hero-slide"><img src="images/together-main.jpg" alt="수직정원 옆 대형 전시 배너가 걸린 부산현대미술관 외관"></div>
   <div class="hero-slide"><img src="images/hero-04.webp" alt="푸른 하늘 아래 수직정원으로 덮인 부산현대미술관 건물"></div>
   <div class="hero-slide"><img src="images/hero-05.webp" alt="원형 서가와 계단식 좌석이 있는 어린이 도서관 책그림섬"></div>
+  <div class="hero-slide"><img src="images/hero-01.webp" alt="수직정원으로 덮인 부산현대미술관 정면과 줄무늬 진입 광장"></div>
 
   <div class="hero-copy">
     <p class="kicker">부산현대미술관 · 을숙도</p>
@@ -590,6 +598,8 @@
         <button class="arrow" aria-label="다음"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M9 4l8 8-8 8"/></svg></button>
       </div>
 
+      <!-- 1번 전시: Re: 새-새-의자 -->
+      <div class="exh-slide on" aria-roledescription="slide" aria-label="1 / 2">
       <div class="exh-main ph is-poster">
         <img src="images/re-saesae-chair-poster.jpg" alt="Re: 새-새-의자 전시 포스터 – 재활용 플라스틱 모듈로 만든 의자 그림과 RE BIRD NEW CHAIR 글자">
       </div>
@@ -615,6 +625,36 @@
             <h4>조형물 모듈로 다시 태어난 로비 의자</h4>
           </a>
         </div>
+      </div>
+      </div>
+      <!-- 2번 전시: 패트릭 블랑 (exhibition.html#detail/patrick-blanc 자료) -->
+      <div class="exh-slide" aria-roledescription="slide" aria-label="2 / 2">
+      <div class="exh-main ph is-poster is-cover">
+        <img src="images/patrick-blanc-poster.jpg" alt="패트릭 블랑: 수직정원 전시 포스터 – 식물 이름 손글씨와 수직정원 드로잉">
+      </div>
+
+      <div class="exh-info">
+        <h3><a href="exhibition.html#detail/patrick-blanc">패트릭 블랑: 수직정원</a> <small class="en">Patrick BLANC : Vertical Garden</small></h3>
+        <ul class="exh-meta">
+          <li><b>기간</b><span>2018.06.16 – 상설</span></li>
+          <li><b>장소</b><span>부산현대미술관 외벽</span></li>
+          <li><b>참여작가</b><span>패트릭 블랑</span></li>
+          <li><b>출품작</b><span>설치 1점</span></li>
+        </ul>
+        <p class="exh-desc">‘수직정원의 창시자’인 식물학자 패트릭 블랑의 국내 최초 대규모 실외 설치 작업입니다. 부산의 식물 생태계를 직접 조사해 고른 175종의 토종·토착 식물 4만 4천여 포트를 미술관 외벽에 심어, 차가운 콘크리트 벽을 생물 다양성의 보고로 바꾸었습니다.</p>
+        <div class="exh-thumbs">
+          <a href="exhibition.html#detail/patrick-blanc" class="thumb">
+            <div class="img ph"><img src="images/patrick-blanc-03.jpg" alt="수직정원 앞에 선 식물학자 패트릭 블랑" loading="lazy"></div>
+            <small>VERTICAL GARDEN</small>
+            <h4>수직정원 앞의 작가, 패트릭 블랑</h4>
+          </a>
+          <a href="exhibition.html#detail/patrick-blanc" class="thumb">
+            <div class="img ph"><img src="images/patrick-blanc-02.jpg" alt="식물로 덮인 부산현대미술관 정면 파노라마" loading="lazy"></div>
+            <small>VERTICAL GARDEN</small>
+            <h4>4만 4천여 포트의 식물이 자라는 외벽</h4>
+          </a>
+        </div>
+      </div>
       </div>
     </div>
   </div>
@@ -1051,6 +1091,32 @@
   const step = () => track.querySelector('.prod').offsetWidth + 24;
   document.getElementById('sPrev').onclick = () => track.scrollBy({ left: -step(), behavior: 'smooth' });
   document.getElementById('sNext').onclick = () => track.scrollBy({ left: step(), behavior: 'smooth' });
+
+  // exhibition feature slider: side arrows, swipe on touch; 전시 더보기 follows the shown exhibition
+  (() => {
+    const body = document.querySelector('.exh-body');
+    if (!body) return;
+    const slides = [...body.querySelectorAll('.exh-slide')];
+    const [prev, next] = body.querySelectorAll('.side-arrows .arrow');
+    const more = document.querySelector('#exhibition .more-btn');
+    let at = 0;
+    const show = i => {
+      at = (i + slides.length) % slides.length;
+      slides.forEach((s, k) => { s.classList.toggle('on', k === at); s.setAttribute('aria-hidden', k === at ? 'false' : 'true'); });
+      const link = slides[at].querySelector('.exh-info h3 a');
+      if (more && link) more.setAttribute('href', link.getAttribute('href'));
+    };
+    prev.addEventListener('click', () => show(at - 1));
+    next.addEventListener('click', () => show(at + 1));
+    let sx = null;
+    body.addEventListener('touchstart', ev => { sx = ev.touches[0].clientX; }, { passive: true });
+    body.addEventListener('touchend', ev => {
+      if (sx === null) return;
+      const dx = ev.changedTouches[0].clientX - sx; sx = null;
+      if (Math.abs(dx) > 50) show(at + (dx < 0 ? 1 : -1));
+    });
+    show(0);
+  })();
 
   // collection carousel
   const colTrack = document.getElementById('colTrack');
