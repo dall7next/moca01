@@ -1019,6 +1019,18 @@
     desc: `${sub}을(를) 주제로 한 전시입니다. 전시 소개 문구는 확정되는 대로 바뀝니다.`,
     outline: ['전시 개요', '주요 작품', '관람 안내']
   })));
+  /* 현재 전시 3번째: 2026 부산현대미술관 플랫폼_공생 직조 (패트릭 블랑 다음) */
+  EXH.splice(EXH.findIndex(e => e.id === 'patrick-blanc') + 1, 0, {
+    id: 'symbiotic-couture', group: 'current', status: 'on', badge: '기획 전시',
+    title: '2026 부산현대미술관 플랫폼_공생 직조', sub: 'Symbiotic Couture · 지속가능한 미래 의복',
+    lead: '지속 가능한 소재와 윤리적 생산 방식을 결합한 미래 의복의 확장성과 가능성을 탐구하는 전시입니다.',
+    period: '2026.12.11 – 2027.03.07', place: '전시실 5 (2층)', artists: '공모를 통한 선정 작가(팀)',
+    works: '뉴미디어 아트, 웨어러블 컴퓨팅 & 디바이스, 생태 소재 연구, 데이터 시각화, 바이오 꾸뛰르, 디자인, 웨어러블 로봇 등', curator: '하상민 학예연구사',
+    img: 'images/symbiotic-couture-poster.jpg', hero: 'images/symbiotic-couture-poster.jpg', detailImg: 'images/symbiotic-couture-poster.jpg',
+    views: 0, type: [],
+    desc: '2023년 시작한 연례전으로 4회째인 《2026 부산현대미술관 플랫폼》은 지속 가능한 소재와 윤리적 생산 방식을 결합한 미래 의복의 확장성과 가능성을 탐구하는 전시로, 예술적 사유와 초학제적 접근을 통한 지속가능한 의복에 대한 새로운 감각과 실천 가능성을 제안한다.',
+    outline: ['전시 개요', '참여 작가', '출품작'], source: 'https://www.busan.go.kr/moca/exhibition02/1714074'
+  });
   {
     // 누리집 지난 전시를 더한 뒤, 지난 전시는 시작일이 최근인 순서로 정렬
     const at = EXH.findIndex(e => e.group === 'past');
