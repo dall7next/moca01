@@ -139,6 +139,16 @@
   .slide.is-intro .shade{background:radial-gradient(ellipse 62% 52% at 0% 0%,rgba(0,0,0,.6) 0%,rgba(0,0,0,.35) 45%,rgba(0,0,0,0) 100%)}
   .slide.is-poster > img{filter:blur(18px) saturate(1.2);transform:scale(1.2)}
   .slide.is-poster.on > img{transform:scale(1.15)}
+  /* 배경 사진이 따로 있는 포스터 배너: 흐림 없이 사진 그대로, 글자 쪽만 은은한 검정 그라데이션 */
+  .slide.is-poster.has-bg > img,.slide.is-poster.has-bg.on > img{filter:none;transform:none;object-position:50% 50%}
+  .slide.is-poster.has-bg.bg-flip > img,.slide.is-poster.has-bg.bg-flip.on > img{transform:scaleX(-1);object-position:50% 42%}
+  .slide.has-bg .shade{background:linear-gradient(90deg,rgba(0,0,0,.62) 0%,rgba(0,0,0,.38) 32%,rgba(0,0,0,0) 58%),linear-gradient(0deg,rgba(0,0,0,.45) 0%,rgba(0,0,0,0) 42%)}
+  /* 배경 사진이 있는 배너: 포스터를 작게 줄여 오른쪽 '전시 자세히 보기' 버튼 위로 */
+  .slide.has-bg .sl-poster{left:auto;top:auto;right:48px;bottom:120px;width:170px;height:170px;transform:translateY(12px)}
+  .slide.has-bg.on .sl-poster{transform:none}
+  /* 세로로 긴 포스터: 버튼 폭 그대로, 높이만 늘림 */
+  .slide.has-bg.poster-tall .sl-poster{height:212px}
+  .slide.has-bg.poster-tall .sl-poster img{object-position:50% 40%}
   .sl-poster{position:absolute;left:50%;top:50%;height:calc(100% - 156px);aspect-ratio:1/1;z-index:2;box-shadow:0 18px 40px rgba(0,0,0,.35);opacity:0;transform:translate(-50%,calc(-50% + 16px));transition:opacity .9s ease .3s,transform .9s ease .3s}
   .slide.on .sl-poster{opacity:1;transform:translate(-50%,-50%)}
   .sl-poster img{width:100%;height:100%;object-fit:cover;display:block}
@@ -768,6 +778,7 @@
       period: '2024.03.15 – 상설', place: '지상 1층, 야외정원 등', artists: '이웅렬, 곽이브',
       works: '재활용 플라스틱 이용 디자인 가구 등', curator: '김가현 학예연구사',
       img: 'images/re-saesae-chair-poster.jpg', hero: 'images/re-saesae-chair-poster.jpg', poster: true,
+      heroBg: 'images/re-saesae-hero-bg.webp', heroFlip: true, // 배너 배경: 야외정원의 새 조형물 사진 (좌우 반전)
       // 포스터 + 작품 사진: 야외정원의 새 조형물(Re: 새-새-정글)과 로비의 모듈 의자
       gallery: ['images/re-saesae-chair-poster.jpg', 'images/re-saesae-chair-lobby.jpg', 'images/re-saesae-duck-portrait.jpg', 'images/re-saesae-duck-child.jpg', 'images/re-saesae-duck-sky.jpg', 'images/re-saesae-jungle.webp', 'images/re-saesae-chair-lobby-02.jpg', 'images/re-saesae-chair-lobby-03.jpg', 'images/re-saesae-tree.jpg', 'images/re-saesae-duck-blue.jpg', 'images/re-saesae-aerial.jpg', 'images/re-saesae-duck-evening.jpg', 'images/re-saesae-wave.jpg'],
       size: [['쇠백로', '156,000 x 10,000 x 9,300 mm'], ['파도 1', '2,150 x 2,150 x 1,675 mm'], ['파도 2', '4,350 x 2,700 x 2,200 mm'], ['파도 3', '4,350 x 2,700 x 1,625 mm'], ['나무', '5,000 x 5,000 x 6,255 mm']],
@@ -792,6 +803,7 @@
       period: '2018.06.16 – 상설', place: '부산현대미술관 외벽', artists: '패트릭 블랑',
       works: '설치 1점', curator: '류소영 학예연구사(현재 담당: 최상호 학예연구사)',
       img: 'images/patrick-blanc-poster.jpg', hero: 'images/hero-01.webp',
+      poster: true, heroBg: 'images/hero-01.webp', posterImg: 'images/patrick-blanc-poster.jpg', posterTall: true, // 배너: 수직정원 사진 + 오른쪽 작은 포스터
       gallery: ['images/patrick-blanc-poster.jpg', 'images/patrick-blanc-01.jpg', 'images/patrick-blanc-02.jpg', 'images/patrick-blanc-03.jpg', 'images/patrick-blanc-04.jpg', 'images/patrick-blanc-05.jpg', 'images/patrick-blanc-06.jpg'],
       views: 0, type: [],
       desc: [
@@ -1228,10 +1240,10 @@
     }
     slideItems = SLIDES[tab].map(id => all().find(x => x.id === id)).filter(Boolean);
     $('#slides').innerHTML = slideItems.map((e, i) => `
-      <article class="slide${i === 0 ? ' on' : ''}${e.poster ? ' is-poster' : ''}" aria-hidden="${i === 0 ? 'false' : 'true'}">
-        <img src="${e.hero}" alt="">
+      <article class="slide${i === 0 ? ' on' : ''}${e.poster ? ' is-poster' : ''}${e.heroBg ? ' has-bg' : ''}${e.heroFlip ? ' bg-flip' : ''}${e.posterTall ? ' poster-tall' : ''}" aria-hidden="${i === 0 ? 'false' : 'true'}">
+        <img src="${e.heroBg || e.hero}" alt="">
         <div class="shade"></div>
-        ${e.poster ? `<div class="sl-poster"><img src="${e.hero}" alt="${esc(e.title)} 포스터"></div>` : ''}
+        ${e.poster ? `<div class="sl-poster"><img src="${e.posterImg || e.hero}" alt="${esc(e.title)} 포스터"></div>` : ''}
         ${e.tagline && !e.poster ? `<p class="tagline">${esc(e.tagline)}</p>` : ''}
         <div class="sl-copy">
           <span class="label">${esc(e.badge)}</span>
